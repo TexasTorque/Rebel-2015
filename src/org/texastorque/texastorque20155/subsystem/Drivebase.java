@@ -2,14 +2,14 @@ package org.texastorque.texastorque20155.subsystem;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.texastorque.texastorque20155.monitor.Monitor;
+import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.torquelib.controlLoop.TorquePV;
 import org.texastorque.torquelib.controlLoop.TorqueTMP;
 import org.texastorque.torquelib.util.TorqueUtil;
 
-public class Drivebase {
+public class Drivebase extends Subsystem {
 
-    private Monitor monitor;
+    private Feedback monitor;
 
     private double leftSpeed;
     private double rightSpeed;
@@ -20,7 +20,7 @@ public class Drivebase {
     private TorquePV rightPV;
 
     public Drivebase() {
-        monitor = Monitor.getInstance();
+        monitor = Feedback.getInstance();
 
         profile = new TorqueTMP(10, 5);
         leftPV = new TorquePV();

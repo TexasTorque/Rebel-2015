@@ -14,8 +14,8 @@ public class HumanInput {
     private double O_rightYAxis;
 
     private HumanInput() {
-        driver = new GenericController(1, 0.1);
-        operator = new GenericController(2, 0.1);
+        driver = new GenericController(1, 0.15);
+        operator = new GenericController(2, 0.15);
         D_rightXAxis = 0.0;
         D_leftYAxis = 0.0;
 

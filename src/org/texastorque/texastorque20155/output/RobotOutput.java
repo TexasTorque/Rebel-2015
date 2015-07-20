@@ -24,8 +24,8 @@ public class RobotOutput {
         rightDriveMini = new TorqueMotor(new Victor(Ports.RIGHT_DRIVE_MINI_MOTOR_PORT), true, true);
         rightDriveCim = new TorqueMotor(new Victor(Ports.RIGHT_DRIVE_CIM_MOTOR_PORT), true, true);
 
-        leftIntake = new TorqueMotor(new Victor(Ports.LEFT_INTAKE_MOTOR_PORT), false, true);
-        rightIntake = new TorqueMotor(new Victor(Ports.RIGHT_INTAKE_MOTOR_PORT), true, true);
+        leftIntake = new TorqueMotor(new Victor(Ports.LEFT_INTAKE_MOTOR_PORT), true, true);
+        rightIntake = new TorqueMotor(new Victor(Ports.RIGHT_INTAKE_MOTOR_PORT), false, true);
     }
 
     public void setOutputEnabled(boolean enabled) {
@@ -34,6 +34,10 @@ public class RobotOutput {
 
     public void setDriveOutput(double left, double right) {
         if (!outputEnabled) {
+            leftDriveMini.set(0.0);
+            leftDriveCim.set(0.0);
+            rightDriveMini.set(0.0);
+            rightDriveCim.set(0.0);
             return;
         }
         leftDriveMini.set(left);
@@ -44,6 +48,8 @@ public class RobotOutput {
 
     public void setIntakeOutput(double left, double right) {
         if (!outputEnabled) {
+            leftIntake.set(0.0);
+            rightIntake.set(0.0);
             return;
         }
         leftIntake.set(left);

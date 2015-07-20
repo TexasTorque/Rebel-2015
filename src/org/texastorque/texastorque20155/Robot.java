@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.input.HumanInput;
-import org.texastorque.texastorque20155.monitor.Monitor;
+import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.texastorque20155.output.RobotOutput;
 import org.texastorque.texastorque20155.subsystem.Drivebase;
 import org.texastorque.texastorque20155.subsystem.Intake;
@@ -15,7 +15,7 @@ public class Robot extends IterativeRobot {
     private int numCycles;
 
     private HumanInput input;
-    private Monitor monitor;
+    private Feedback monitor;
     private RobotOutput output;
 
     private Drivebase drivebase;
@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         watchdog = Watchdog.getInstance();
         input = HumanInput.getInstance();
-        monitor = Monitor.getInstance();
+        monitor = Feedback.getInstance();
         output = RobotOutput.getInstance();
 
         output.setOutputEnabled(true);

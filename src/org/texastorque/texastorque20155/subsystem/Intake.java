@@ -1,6 +1,6 @@
 package org.texastorque.texastorque20155.subsystem;
 
-public class Intake {
+public class Intake extends Subsystem {
 
     private double leftIntakeSpeed;
     private double rightIntakeSpeed;
