@@ -1,5 +1,10 @@
 package org.texastorque.texastorque20155;
 
-public class Robot {
+import org.texastorque.torquelib.base.TorqueIterative;
 
+public class Robot extends TorqueIterative {
+
+    @Override
+    public void robotInit() {
+    }
 }
