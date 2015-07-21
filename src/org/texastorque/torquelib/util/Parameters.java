@@ -34,6 +34,7 @@ public class Parameters {
      * Constants listed in the file override hardcoded constants.
      */
     public static void load() {
+        makeFile();
         try (BufferedReader br = new BufferedReader(new FileReader(paramsFile))) {
             String line;
             while ((line = br.readLine()) != null) {

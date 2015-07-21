@@ -3,9 +3,8 @@ package org.texastorque.torquelib.component;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- * Generic Motor class that also provides linearization for IFI/Vex Pro 88x
- * motor controllers. Talons, Jaguars, and Victor SP's are basically perfect and
- * do not need linearization.
+ * Generic Motor class that also provides linearization for IFI/Vex Pro 88x motor controllers. Talons, Jaguars, and Victor SP's are basically perfect and do not
+ * need linearization.
  */
 public class TorqueMotor {
 
@@ -15,6 +14,19 @@ public class TorqueMotor {
     private LinearizationType linearizer;
 
     private double previousSpeed;
+
+    /**
+     * Create a new motor.
+     *
+     * @param sc The SpeedController object.
+     * @param rev Whether or not the motor is reversed.
+     * <p/>
+     * SpeedController is an interface implemented by Victor, Talon, Jaguar.
+     * @see edu.wpi.first.wpilibj.SpeedController
+     */
+    public TorqueMotor(SpeedController sc, boolean rev) {
+        this(sc, rev, LinearizationType.kNone);
+    }
 
     /**
      * Create a new motor.
@@ -60,10 +72,8 @@ public class TorqueMotor {
     }
 
     /**
-     * Specifies the logistic fits used for linearization. This data was
-     * obtained experimentally using some old controllers I had laying around.
-     * The results are not perfect but it's a lot closer to linear than the
-     * normal behaviour.
+     * Specifies the logistic fits used for linearization. This data was obtained experimentally using some old controllers I had laying around. The results are
+     * not perfect but it's a lot closer to linear than the normal behaviour.
      *
      */
     public enum LinearizationType {
