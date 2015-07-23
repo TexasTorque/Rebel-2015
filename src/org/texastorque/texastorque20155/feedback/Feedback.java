@@ -1,10 +1,10 @@
 package org.texastorque.texastorque20155.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import org.texastorque.texastorque20155.output.Ports;
+import org.texastorque.texastorque20155.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 
-public class SensorFeedback {
+public class Feedback {
 
     private TorqueEncoder elevatorEncoder;
 
@@ -23,7 +23,7 @@ public class SensorFeedback {
     private double rightVelocity;
     private double rightAcceleration;
 
-    private SensorFeedback() {
+    private Feedback() {
         elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, false, EncodingType.k4X);
 
         leftDriveEncoder = new TorqueEncoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B, false, EncodingType.k4X);
@@ -33,7 +33,7 @@ public class SensorFeedback {
     public void update() {
     }
 
-    public void putToDashboard() {
+    public void pushToDashboard() {
     }
 
     //getters
@@ -74,11 +74,11 @@ public class SensorFeedback {
     }
 
     //singleton
-    private static SensorFeedback instance;
+    private static Feedback instance;
 
-    public static SensorFeedback getInstance() {
+    public static Feedback getInstance() {
         if (instance == null) {
-            instance = new SensorFeedback();
+            instance = new Feedback();
         }
         return instance;
     }

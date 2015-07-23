@@ -1,10 +1,11 @@
 package org.texastorque.texastorque20155.output;
 
+import org.texastorque.texastorque20155.constants.Ports;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import org.texastorque.torquelib.component.TorqueMotor;
 
-public class RobotOutput {
+public class Output {
 
     private boolean outputEnabled;
 
@@ -21,7 +22,7 @@ public class RobotOutput {
 
     private Solenoid canHolderSolenoid;
 
-    private RobotOutput() {
+    private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
         leftDriveMini = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_MINI_MOTOR_PORT), false);
         rightDriveCim = new TorqueMotor(new VictorSP(Ports.RIGHT_DRIVE_CIM_MOTOR_PORT), true);
@@ -81,11 +82,11 @@ public class RobotOutput {
     }
 
     //singleton
-    private static RobotOutput instance;
+    private static Output instance;
 
-    public static RobotOutput getInstance() {
+    public static Output getInstance() {
         if (instance == null) {
-            instance = new RobotOutput();
+            instance = new Output();
         }
         return instance;
     }
