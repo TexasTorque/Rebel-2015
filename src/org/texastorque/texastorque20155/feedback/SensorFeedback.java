@@ -2,6 +2,9 @@ package org.texastorque.texastorque20155.feedback;
 
 public class SensorFeedback {
 
+    private SensorFeedback() {
+    }
+
     //singleton
     private static SensorFeedback instance;
 
