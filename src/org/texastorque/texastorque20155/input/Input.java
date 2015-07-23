@@ -13,6 +13,9 @@ public class Input {
     private double D_leftYAxis;
     private double D_rightXAxis;
 
+    private double O_rightXAxis;
+    private double O_rightYAxis;
+
     private Input() {
         ds = DriverStation.getInstance();
         driver = new GenericController(1, GenericController.TYPE_XBOX, 0.1);
@@ -22,6 +25,9 @@ public class Input {
     public void update() {
         D_leftYAxis = driver.getLeftYAxis();
         D_rightXAxis = driver.getRightXAxis();
+
+        O_rightXAxis = operator.getRightXAxis();
+        O_rightYAxis = operator.getRightYAxis();
     }
 
     public double getLeftDriveSpeed() {
@@ -30,6 +36,14 @@ public class Input {
 
     public double getRightDriveSpeed() {
         return -D_leftYAxis - D_rightXAxis;
+    }
+
+    public double getLeftIntakeSpeed() {
+        return O_rightYAxis - O_rightXAxis;
+    }
+
+    public double getRightIntakeSpeed() {
+        return O_rightYAxis + O_rightXAxis;
     }
 
     public boolean isAutonomous() {
