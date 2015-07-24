@@ -17,11 +17,10 @@ public class Output {
     private TorqueMotor leftIntakeMotor;
     private TorqueMotor rightIntakeMotor;
 
-//    private TorqueMotor leftElevatorMotor;
-//    private TorqueMotor rightElevatorMotor;
-//
-//    private Solenoid canHolderSolenoid;
+    private TorqueMotor leftElevatorMotor;
+    private TorqueMotor rightElevatorMotor;
 
+//    private Solenoid canHolderSolenoid;
     private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
         leftDriveMini = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_MINI_MOTOR_PORT), false);
@@ -31,11 +30,10 @@ public class Output {
         leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_MOTOR_PORT), false);
         rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_MOTOR_PORT), true);
 
-//        leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), true);
-//        rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
-//
-//        canHolderSolenoid = new Solenoid(Ports.CANHOLDER_SOLENOID_PORT);
+        leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), true);
+        rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
 
+//        canHolderSolenoid = new Solenoid(Ports.CANHOLDER_SOLENOID_PORT);
         outputEnabled = true;
     }
 
@@ -63,16 +61,15 @@ public class Output {
         rightIntakeMotor.set(right);
     }
 
-//    public void setElevatorSpeed(double left, double right) {
-//        if (!outputEnabled) {
-//            leftElevatorMotor.set(0.0);
-//            rightElevatorMotor.set(0.0);
-//            return;
-//        }
-//        leftElevatorMotor.set(left);
-//        rightElevatorMotor.set(right);
-//    }
-
+    public void setElevatorSpeed(double speed) {
+        if (!outputEnabled) {
+            leftElevatorMotor.set(0.0);
+            rightElevatorMotor.set(0.0);
+            return;
+        }
+        leftElevatorMotor.set(speed);
+        rightElevatorMotor.set(speed);
+    }
 //    public void setCanholder(boolean on) {
 //        if (!outputEnabled) {
 //            canHolderSolenoid.set(false);
@@ -80,7 +77,6 @@ public class Output {
 //        }
 //        canHolderSolenoid.set(on);
 //    }
-
     //singleton
     private static Output instance;
 

@@ -10,7 +10,6 @@ public class Feedback {
 //
 //    private TorqueEncoder leftDriveEncoder;
 //    private TorqueEncoder rightDriveEncoder;
-
     private double elevatorPosition;
     private double elevatorVelocity;
     private double elevatorAcceleration;
@@ -71,6 +70,15 @@ public class Feedback {
 
     public double getRightDriveAcceleration() {
         return rightDriveAcceleration;
+    }
+
+    public void resetElevatorEncoders() {
+//        elevatorEncoder.reset();
+    }
+
+    public void resetDriveEncoders() {
+//        leftDriveEncoder.reset();
+//        rightDriveEncoder.reset();
     }
 
     //singleton

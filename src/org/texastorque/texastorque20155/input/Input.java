@@ -3,6 +3,7 @@ package org.texastorque.texastorque20155.input;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.torquelib.util.GenericController;
+import org.texastorque.torquelib.util.logging.TorqueToggle;
 
 public class Input {
 
@@ -17,10 +18,15 @@ public class Input {
     private double O_rightXAxis;
     private double O_rightYAxis;
 
+    private double O_leftYAxis;
+
+    private boolean overrides;
+
     private Input() {
         ds = DriverStation.getInstance();
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.15);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.15);
+        overrides = false;
     }
 
     public void update() {
@@ -29,6 +35,14 @@ public class Input {
 
         O_rightXAxis = operator.getRightXAxis();
         O_rightYAxis = operator.getRightYAxis();
+
+        O_leftYAxis = operator.getLeftYAxis();
+
+        if (operator.getLeftCenterButton()) {
+            overrides = false;
+        } else if (operator.getRightCenterButton()) {
+            overrides = true;
+        }
     }
 
     public double getLeftDriveSpeed() {
@@ -47,6 +61,10 @@ public class Input {
         return O_rightYAxis + O_rightXAxis;
     }
 
+    public double getElevatorOverrideSpeed() {
+        return O_leftYAxis;
+    }
+
     public boolean isAutonomous() {
         return ds.isAutonomous();
     }
@@ -55,8 +73,13 @@ public class Input {
         return ds.isOperatorControl();
     }
 
+    public boolean inOverride() {
+        return overrides;
+    }
+
     public void pushToDashboard() {
         SmartDashboard.putBoolean("IsOperatorControl", isOperatorControlled());
+        SmartDashboard.putBoolean("Overrides", inOverride());
     }
 
     //singleton

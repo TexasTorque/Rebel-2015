@@ -10,6 +10,12 @@ public class Constants extends Parameters {
     //intake
     public static final Constant I_MAX_SPEED = new Constant("I_MAX_SPEED", 1.0);
 
+    //elevator
+    public static final Constant E_MAX_SPEED = new Constant("E_MAX_SPEED", 1.0);
+    
+    public static final Constant E_MAX_VELOCITY = new Constant("E_MAX_VELOCITY", 10.0);
+    public static final Constant E_MAX_ACCELERATION = new Constant("E_MAX_ACCELERATION", 5.0);
+    
     static {
         load();
     }
