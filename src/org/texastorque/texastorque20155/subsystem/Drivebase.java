@@ -122,6 +122,8 @@ public class Drivebase extends Subsystem {
         profile = new TorqueTMP(MAX_VELOCITY, MAX_ACCELERATION);
         leftPV = new TorquePV();
         rightPV = new TorquePV();
+
+        setpoint = feedback.getElevatorPosition();
     }
 
     //singleton

@@ -12,15 +12,15 @@ public class Constants extends Parameters {
     public static final Constant D_MAX_VELOCITY = new Constant("D_MAX_VELOCITY", 10.0);//ft/s
     public static final Constant D_MAX_ACCELERATION = new Constant("D_MAX_ACCELERATION", 5.0);
 
-    public static final Constant D_LEFT_PV_P = new Constant("E_LEFT_PV_P", 0.0);
-    public static final Constant D_LEFT_PV_V = new Constant("E_LEFT_PV_V", 0.0);
-    public static final Constant D_LEFT_PV_ffP = new Constant("E_LEFT_PV_ffP", 0.0);
-    public static final Constant D_LEFT_PV_ffV = new Constant("E_LEFT_PV_ffV", 0.0);
+    public static final Constant D_LEFT_PV_P = new Constant("D_LEFT_PV_P", 0.0);
+    public static final Constant D_LEFT_PV_V = new Constant("D_LEFT_PV_V", 0.0);
+    public static final Constant D_LEFT_PV_ffP = new Constant("D_LEFT_PV_ffP", 0.0);
+    public static final Constant D_LEFT_PV_ffV = new Constant("D_LEFT_PV_ffV", 0.0);
 
-    public static final Constant D_RIGHT_PV_P = new Constant("E_RIGHT_PV_P", 0.0);
-    public static final Constant D_RIGHT_PV_V = new Constant("E_RIGHT_PV_V", 0.0);
-    public static final Constant D_RIGHT_PV_ffP = new Constant("E_RIGHT_PV_ffP", 0.0);
-    public static final Constant D_RIGHT_PV_ffV = new Constant("E_RIGHT_PV_ffV", 0.0);
+    public static final Constant D_RIGHT_PV_P = new Constant("D_RIGHT_PV_P", 0.0);
+    public static final Constant D_RIGHT_PV_V = new Constant("D_RIGHT_PV_V", 0.0);
+    public static final Constant D_RIGHT_PV_ffP = new Constant("D_RIGHT_PV_ffP", 0.0);
+    public static final Constant D_RIGHT_PV_ffV = new Constant("D_RIGHT_PV_ffV", 0.0);
 
     //intake
     public static final Constant I_MAX_SPEED = new Constant("I_MAX_SPEED", 1.0);

@@ -36,6 +36,7 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopInit() {
+        Parameters.load();
         subsystems.forEach((subsystem) -> {
             subsystem.init();
             subsystem.loadParams();

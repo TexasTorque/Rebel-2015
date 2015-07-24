@@ -74,7 +74,7 @@ public class Input {
     }
 
     public double getElevatorOverrideSpeed() {
-        return O_leftYAxis;
+        return -O_leftYAxis;
     }
 
     //booleans
