@@ -113,4 +113,14 @@ public class Elevator extends Subsystem {
 
         setpoint = 0.0;
     }
+    
+    //singleton
+    private static Elevator instance;
+    
+    public static Elevator getInstance() {
+        if (instance == null) {
+            instance = new Elevator();
+        }
+        return instance;
+    }
 }
