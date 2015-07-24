@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.texastorque20155.input.Input;
-import org.texastorque.texastorque20155.output.Output;
 import org.texastorque.texastorque20155.subsystem.Drivebase;
 import org.texastorque.texastorque20155.subsystem.Elevator;
 import org.texastorque.texastorque20155.subsystem.Intake;

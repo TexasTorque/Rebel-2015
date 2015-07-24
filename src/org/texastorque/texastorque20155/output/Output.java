@@ -30,8 +30,8 @@ public class Output {
         leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_MOTOR_PORT), false);
         rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_MOTOR_PORT), true);
 
-        leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), true);
-        rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
+        leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), false);
+        rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), true);
 
 //        canHolderSolenoid = new Solenoid(Ports.CANHOLDER_SOLENOID_PORT);
         outputEnabled = true;
