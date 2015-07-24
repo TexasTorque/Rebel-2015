@@ -15,12 +15,16 @@ public class Input {
     private double D_leftYAxis;
     private double D_rightXAxis;
 
+    private boolean D_rightTrigger;
+
     private double O_rightXAxis;
     private double O_rightYAxis;
     private double O_leftYAxis;
 
     private boolean O_Y;
     private boolean O_B;
+    private boolean O_X;
+    private boolean O_A;
 
     private boolean overrides;
 
@@ -35,12 +39,16 @@ public class Input {
         D_leftYAxis = driver.getLeftYAxis();
         D_rightXAxis = driver.getRightXAxis();
 
+        D_rightTrigger = driver.getRightTrigger();
+
         O_rightXAxis = operator.getRightXAxis();
         O_rightYAxis = operator.getRightYAxis();
         O_leftYAxis = operator.getLeftYAxis();
 
         O_Y = operator.getYButton();
-        O_B = operator.getAButton();
+        O_B = operator.getBButton();
+        O_X = operator.getXButton();
+        O_A = operator.getAButton();
 
         if (operator.getLeftCenterButton()) {
             overrides = true;
@@ -75,6 +83,18 @@ public class Input {
 
     public boolean getElevatorDown() {
         return O_B;
+    }
+
+    public boolean getToggleAutoStack() {
+        return O_X;
+    }
+
+    public boolean getStabilizer() {
+        return O_A;
+    }
+
+    public boolean getPlace() {
+        return D_rightTrigger;
     }
 
     public boolean isAutonomous() {
