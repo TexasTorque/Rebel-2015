@@ -29,8 +29,8 @@ public class Input {
 
     private Input() {
         ds = DriverStation.getInstance();
-        driver = new GenericController(0, GenericController.TYPE_XBOX, 0.15);
-        operator = new GenericController(1, GenericController.TYPE_XBOX, 0.15);
+        driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
+        operator = new GenericController(1, GenericController.TYPE_XBOX, 0.12);
         overrides = false;
     }
 
@@ -56,6 +56,7 @@ public class Input {
         }
     }
 
+    //numbers
     public double getLeftDriveSpeed() {
         return -D_leftYAxis + D_rightXAxis;
     }
@@ -76,6 +77,7 @@ public class Input {
         return O_leftYAxis;
     }
 
+    //booleans
     public boolean getElevatorUp() {
         return O_Y;
     }

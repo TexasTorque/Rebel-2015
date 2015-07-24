@@ -32,7 +32,7 @@ public class Feedback {
     }
 
     public void update() {
-        //elevator conversion: rotations * 1.6 = inches
+        //elevator conversion: rotations * (1.6 / 12) = height in feet
         elevatorEncoder.calc();
         elevatorPosition = (elevatorEncoder.get() / 250.0) * ELEVATOR_CONVERSION;
         elevatorVelocity = (elevatorEncoder.getRate() / 250.0) * ELEVATOR_CONVERSION;
