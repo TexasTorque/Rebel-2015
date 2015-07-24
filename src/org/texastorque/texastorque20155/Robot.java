@@ -17,7 +17,6 @@ public class Robot extends TorqueIterative {
 
     private Feedback feedback;
     private Input input;
-    private Output output;
 
     private ArrayList<Subsystem> subsystems;
 
@@ -26,7 +25,6 @@ public class Robot extends TorqueIterative {
         Parameters.load();
         feedback = Feedback.getInstance();
         input = Input.getInstance();
-        output = Output.getInstance();
 
         subsystems = new ArrayList<>();
         subsystems.add(Drivebase.getInstance());
@@ -58,6 +56,11 @@ public class Robot extends TorqueIterative {
 
         //process
         subsystems.forEach((subsystem) -> subsystem.run());
+    }
+
+    @Override
+    public void disabledInit() {
+        numCycles = 0;
     }
 
     @Override
