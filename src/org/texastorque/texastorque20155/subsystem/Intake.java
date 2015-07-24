@@ -12,12 +12,6 @@ public class Intake extends Subsystem {
     private double rightSpeed;
 
     @Override
-    public void pushToDashboard() {
-        SmartDashboard.putNumber("Intake Left Speed", leftSpeed);
-        SmartDashboard.putNumber("Intake Right Speed", rightSpeed);
-    }
-
-    @Override
     public void run() {
         if (input.isAutonomous()) {
             runAuto();
@@ -41,6 +35,12 @@ public class Intake extends Subsystem {
         leftSpeed = TorqueMathUtil.constrain(leftSpeed, MAX_SPEED);
         rightSpeed = TorqueMathUtil.constrain(rightSpeed, MAX_SPEED);
         output.setIntakeSpeed(leftSpeed, rightSpeed);
+    }
+
+    @Override
+    public void pushToDashboard() {
+        SmartDashboard.putNumber("Intake Left Speed", leftSpeed);
+        SmartDashboard.putNumber("Intake Right Speed", rightSpeed);
     }
 
     @Override
