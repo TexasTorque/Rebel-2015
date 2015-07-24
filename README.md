@@ -10,6 +10,6 @@ Setup instructions
 3. (Optional) Install Apache Ant
 
 Run instructions
-	Compile: ant compile
-	Push to RoboRIO: ant jar
-	Push and update build count: ant dau
+ - Compile: ant compile
+ - Push to RoboRIO: ant jar
+ - Push and update build count: ant dau
