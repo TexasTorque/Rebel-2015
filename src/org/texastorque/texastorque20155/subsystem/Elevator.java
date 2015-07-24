@@ -24,6 +24,10 @@ public class Elevator extends Subsystem {
     private TorqueTMP profile;
     private TorquePV pv;
 
+    private double targetPosition;
+    private double targetVelocity;
+    private double targetAcceleration;
+
     private double setpoint;
     private double previousSetpoint;
 
@@ -51,16 +55,20 @@ public class Elevator extends Subsystem {
         if (input.inOverride()) {
             speed = input.getElevatorOverrideSpeed();
         } else {
+            //get setpoint
+
             if (setpoint != previousSetpoint) {
                 previousSetpoint = setpoint;
                 profile.generateTrapezoid(setpoint, position, velocity);
-
-                feedback.resetElevatorEncoders();
             }
 
             double dt = Timer.getFPGATimestamp() - prevTime;
             profile.calculateNextSituation(Timer.getFPGATimestamp() - prevTime);
             prevTime = Timer.getFPGATimestamp();
+
+            targetPosition = profile.getCurrentPosition();
+            targetVelocity = profile.getCurrentVelocity();
+            targetAcceleration = profile.getCurrentAcceleration();
 
             speed = pv.calculate(profile, position, velocity);
         }
@@ -78,6 +86,12 @@ public class Elevator extends Subsystem {
 
         MAX_VELOCITY = Constants.E_MAX_VELOCITY.getDouble();
         MAX_ACCELERATION = Constants.E_MAX_ACCELERATION.getDouble();
+
+        pv.setGains(Constants.E_PV_P.getDouble(),
+                Constants.E_PV_V.getDouble(),
+                Constants.E_PV_ffP.getDouble(),
+                Constants.E_PV_ffV.getDouble());
+        pv.setTunedVoltage(Constants.TUNED_VOLTAGE.getDouble());
     }
 
     @Override
@@ -86,6 +100,10 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("Elevator Position", position);
         SmartDashboard.putNumber("Elevator Velocity", velocity);
         SmartDashboard.putNumber("Elevator Acceleration", accelertion);
+
+        SmartDashboard.putNumber("Elevator Target Position", targetPosition);
+        SmartDashboard.putNumber("Elevator Target Velocity", targetVelocity);
+        SmartDashboard.putNumber("Elevator Target Acceleration", targetAcceleration);
     }
 
     @Override
