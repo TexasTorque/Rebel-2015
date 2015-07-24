@@ -61,6 +61,15 @@ public class Drivebase extends Subsystem {
     public void pushToDashboard() {
         SmartDashboard.putNumber("Left Drive Speed", leftSpeed);
         SmartDashboard.putNumber("Right Drive Speed", rightSpeed);
+
+        SmartDashboard.putNumber("Left Drive Position", leftPosition);
+        SmartDashboard.putNumber("Right Drive Position", rightPosition);
+
+        SmartDashboard.putNumber("Left Drive Velocity", leftVelocity);
+        SmartDashboard.putNumber("Right Drive Velocity", rightVelocity);
+
+        SmartDashboard.putNumber("Left Drive Acceleration", leftAcceleration);
+        SmartDashboard.putNumber("Right Drive Acceleration", rightAcceleration);
     }
 
     @Override

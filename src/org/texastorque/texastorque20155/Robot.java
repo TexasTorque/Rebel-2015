@@ -51,8 +51,10 @@ public class Robot extends TorqueIterative {
 
         //process
         subsystems.forEach((subsystem) -> subsystem.run());
+    }
 
-        //close
+    @Override
+    public void teleopContinuous() {
         updateDashboard();
     }
 
@@ -62,8 +64,9 @@ public class Robot extends TorqueIterative {
     }
 
     private void updateDashboard() {
-        subsystems.forEach((subsystem) -> subsystem.pushToDashboard());
+        input.pushToDashboard();
         feedback.pushToDashboard();
+        subsystems.forEach((subsystem) -> subsystem.pushToDashboard());
         SmartDashboard.putNumber("NumCycles", numCycles++);
     }
 }

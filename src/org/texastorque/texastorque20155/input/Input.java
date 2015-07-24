@@ -1,6 +1,7 @@
 package org.texastorque.texastorque20155.input;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.torquelib.util.GenericController;
 
 public class Input {
@@ -52,6 +53,10 @@ public class Input {
 
     public boolean isOperatorControlled() {
         return ds.isOperatorControl();
+    }
+
+    public void pushToDashboard() {
+        SmartDashboard.putBoolean("IsOperatorControl", isOperatorControlled());
     }
 
     //singleton
