@@ -23,14 +23,12 @@ public class Intake extends Subsystem {
 
     @Override
     public void run() {
-        if (input.isActive()) {
-            if (input.isAutonomous()) {
-                runAuto();
-                output();
-            } else if (input.isOperatorControlled()) {
-                runTeleop();
-                output();
-            }
+        if (input.isAutonomous()) {
+            runAuto();
+            output();
+        } else if (input.isOperatorControlled()) {
+            runTeleop();
+            output();
         }
     }
 

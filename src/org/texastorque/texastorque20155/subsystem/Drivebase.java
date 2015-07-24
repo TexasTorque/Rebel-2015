@@ -31,14 +31,12 @@ public class Drivebase extends Subsystem {
         leftAcceleration = feedback.getLeftDriveAcceleration();
         rightAcceleration = feedback.getRightDriveAcceleration();
 
-        if (input.isActive()) {
-            if (input.isAutonomous()) {
-                runAuto();
-                output();
-            } else if (input.isOperatorControlled()) {
-                runTeleop();
-                output();
-            }
+        if (input.isAutonomous()) {
+            runAuto();
+            output();
+        } else if (input.isOperatorControlled()) {
+            runTeleop();
+            output();
         }
     }
 

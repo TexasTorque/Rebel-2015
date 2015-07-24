@@ -54,10 +54,6 @@ public class Input {
         return ds.isOperatorControl();
     }
 
-    public boolean isActive() {
-        return ds.isSysActive();
-    }
-
     //singleton
     private static Input instance;
 
