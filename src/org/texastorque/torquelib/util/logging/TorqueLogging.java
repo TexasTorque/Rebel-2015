@@ -1,4 +1,4 @@
-package org.texastorque.torquelib.util;
+package org.texastorque.torquelib.util.logging;
 
 import edu.wpi.first.wpilibj.Timer;
 import java.io.BufferedWriter;

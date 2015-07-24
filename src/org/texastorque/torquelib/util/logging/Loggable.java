@@ -1,4 +1,4 @@
-package org.texastorque.torquelib.util;
+package org.texastorque.torquelib.util.logging;
 
 public interface Loggable {
 

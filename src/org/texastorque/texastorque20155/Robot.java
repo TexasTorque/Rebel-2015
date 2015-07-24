@@ -45,17 +45,17 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopPeriodic() {
+        updateDashboard();
+    }
+
+    @Override
+    public void teleopContinuous() {
         //open
         input.update();
         feedback.update();
 
         //process
         subsystems.forEach((subsystem) -> subsystem.run());
-    }
-
-    @Override
-    public void teleopContinuous() {
-        updateDashboard();
     }
 
     @Override

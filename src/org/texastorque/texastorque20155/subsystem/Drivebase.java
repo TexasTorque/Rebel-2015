@@ -1,8 +1,12 @@
 package org.texastorque.texastorque20155.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.texastorque20155.constants.Constants;
+import org.texastorque.torquelib.util.TorqueMathUtil;
 
 public class Drivebase extends Subsystem {
+
+    private double MAX_SPEED;
 
     private double leftSpeed;
     private double rightSpeed;
@@ -50,11 +54,14 @@ public class Drivebase extends Subsystem {
 
     @Override
     protected void output() {
+        leftSpeed = TorqueMathUtil.constrain(leftSpeed, MAX_SPEED);
+        rightSpeed = TorqueMathUtil.constrain(rightSpeed, MAX_SPEED);
         output.setDriveSpeed(leftSpeed, rightSpeed);
     }
 
     @Override
     public void loadParams() {
+        MAX_SPEED = Constants.D_MAX_SPEED.getDouble();
     }
 
     @Override
