@@ -3,7 +3,6 @@ package org.texastorque.texastorque20155.input;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.torquelib.util.GenericController;
-import org.texastorque.torquelib.util.logging.TorqueToggle;
 
 public class Input {
 

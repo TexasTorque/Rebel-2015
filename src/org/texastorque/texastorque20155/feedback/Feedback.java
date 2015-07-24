@@ -6,8 +6,10 @@ import org.texastorque.torquelib.component.TorqueEncoder;
 
 public class Feedback {
 
-//    private TorqueEncoder elevatorEncoder;
-//
+    private final double ELEVATOR_CONVERSION = 1.6 / 12;
+
+    private TorqueEncoder elevatorEncoder;
+
 //    private TorqueEncoder leftDriveEncoder;
 //    private TorqueEncoder rightDriveEncoder;
     private double elevatorPosition;
@@ -23,14 +25,18 @@ public class Feedback {
     private double rightDriveAcceleration;
 
     private Feedback() {
-//        elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, false, EncodingType.k4X);
-//
+        elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, false, EncodingType.k4X);
+
 //        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B, false, EncodingType.k4X);
 //        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B, false, EncodingType.k4X);
     }
 
     public void update() {
         //elevator conversion: rotations * 1.6 = inches
+        elevatorEncoder.calc();
+        elevatorPosition = (elevatorEncoder.get() / 250.0) * ELEVATOR_CONVERSION;
+        elevatorVelocity = (elevatorEncoder.getRate() / 250.0) * ELEVATOR_CONVERSION;
+        elevatorAcceleration = (elevatorEncoder.getAcceleration() / 250.0) * ELEVATOR_CONVERSION;
     }
 
     public void pushToDashboard() {
