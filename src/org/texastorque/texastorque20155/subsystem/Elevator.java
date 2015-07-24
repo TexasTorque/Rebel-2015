@@ -20,7 +20,7 @@ public class Elevator extends Subsystem {
     private double velocity;
     private double accelertion;
 
-    //complicated stuff
+    //profiling
     private TorqueTMP profile;
     private TorquePV pv;
 
@@ -55,7 +55,11 @@ public class Elevator extends Subsystem {
         if (input.inOverride()) {
             speed = input.getElevatorOverrideSpeed();
         } else {
-            //get setpoint
+            if (input.getElevatorUp()) {
+                setpoint = Constants.E_UP_POSITION.getDouble();
+            } else if (input.getElevatorDown()) {
+                setpoint = Constants.E_DOWN_POSITION.getDouble();
+            }
 
             if (setpoint != previousSetpoint) {
                 previousSetpoint = setpoint;
@@ -113,10 +117,10 @@ public class Elevator extends Subsystem {
 
         setpoint = 0.0;
     }
-    
+
     //singleton
     private static Elevator instance;
-    
+
     public static Elevator getInstance() {
         if (instance == null) {
             instance = new Elevator();

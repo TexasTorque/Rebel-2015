@@ -17,8 +17,10 @@ public class Input {
 
     private double O_rightXAxis;
     private double O_rightYAxis;
-
     private double O_leftYAxis;
+    
+    private boolean O_Y;
+    private boolean O_B;
 
     private boolean overrides;
 
@@ -35,8 +37,10 @@ public class Input {
 
         O_rightXAxis = operator.getRightXAxis();
         O_rightYAxis = operator.getRightYAxis();
-
         O_leftYAxis = operator.getLeftYAxis();
+        
+        O_Y = operator.getYButton();
+        O_B = operator.getAButton();
 
         if (operator.getLeftCenterButton()) {
             overrides = false;
@@ -63,6 +67,14 @@ public class Input {
 
     public double getElevatorOverrideSpeed() {
         return O_leftYAxis;
+    }
+    
+    public boolean getElevatorUp() {
+        return O_Y;
+    }
+    
+    public boolean getElevatorDown() {
+        return O_B;
     }
 
     public boolean isAutonomous() {

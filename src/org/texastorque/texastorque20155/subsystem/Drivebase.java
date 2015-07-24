@@ -7,7 +7,7 @@ import org.texastorque.torquelib.util.TorqueMathUtil;
 public class Drivebase extends Subsystem {
 
     private double MAX_SPEED;
-
+    
     private double leftSpeed;
     private double rightSpeed;
 
