@@ -22,14 +22,14 @@ public class Drivebase extends Subsystem {
 
     @Override
     public void run() {
-        leftPosition = feedback.getLeftPosition();
-        rightPosition = feedback.getRightPosition();
+        leftPosition = feedback.getLeftDrivePosition();
+        rightPosition = feedback.getRightDrivePosition();
 
-        leftVelocity = feedback.getLeftVelocity();
-        rightVelocity = feedback.getRightVelocity();
+        leftVelocity = feedback.getLeftDriveVelocity();
+        rightVelocity = feedback.getRightDriveVelocity();
 
-        leftAcceleration = feedback.getLeftAcceleration();
-        rightAcceleration = feedback.getRightAcceleration();
+        leftAcceleration = feedback.getLeftDriveAcceleration();
+        rightAcceleration = feedback.getRightDriveAcceleration();
 
         if (input.isActive()) {
             if (input.isAutonomous()) {

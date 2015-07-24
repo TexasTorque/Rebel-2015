@@ -15,13 +15,13 @@ public class Feedback {
     private double elevatorVelocity;
     private double elevatorAcceleration;
 
-    private double leftPosition;
-    private double leftVelocity;
-    private double leftAcceleration;
+    private double leftDrivePosition;
+    private double leftDriveVelocity;
+    private double leftDriveAcceleration;
 
-    private double rightPosition;
-    private double rightVelocity;
-    private double rightAcceleration;
+    private double rightDrivePosition;
+    private double rightDriveVelocity;
+    private double rightDriveAcceleration;
 
     private Feedback() {
         elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, false, EncodingType.k4X);
@@ -49,28 +49,28 @@ public class Feedback {
         return elevatorAcceleration;
     }
 
-    public double getLeftPosition() {
-        return leftPosition;
+    public double getLeftDrivePosition() {
+        return leftDrivePosition;
     }
 
-    public double getLeftVelocity() {
-        return leftVelocity;
+    public double getLeftDriveVelocity() {
+        return leftDriveVelocity;
     }
 
-    public double getLeftAcceleration() {
-        return leftAcceleration;
+    public double getLeftDriveAcceleration() {
+        return leftDriveAcceleration;
     }
 
-    public double getRightPosition() {
-        return rightPosition;
+    public double getRightDrivePosition() {
+        return rightDrivePosition;
     }
 
-    public double getRightVelocity() {
-        return rightVelocity;
+    public double getRightDriveVelocity() {
+        return rightDriveVelocity;
     }
 
-    public double getRightAcceleration() {
-        return rightAcceleration;
+    public double getRightDriveAcceleration() {
+        return rightDriveAcceleration;
     }
 
     //singleton

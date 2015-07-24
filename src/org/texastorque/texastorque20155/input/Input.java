@@ -18,8 +18,8 @@ public class Input {
 
     private Input() {
         ds = DriverStation.getInstance();
-        driver = new GenericController(1, GenericController.TYPE_XBOX, 0.1);
-        operator = new GenericController(2, GenericController.TYPE_XBOX, 0.1);
+        driver = new GenericController(1, GenericController.TYPE_XBOX, 0.15);
+        operator = new GenericController(2, GenericController.TYPE_XBOX, 0.15);
     }
 
     public void update() {
