@@ -69,6 +69,12 @@ public class Robot extends TorqueIterative {
         updateDashboard();
     }
 
+    @Override
+    public void disabledContinuous() {
+        input.update();
+        feedback.update();
+    }
+
     private void updateDashboard() {
         input.pushToDashboard();
         feedback.pushToDashboard();
