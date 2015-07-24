@@ -30,7 +30,7 @@ public class Feedback {
     }
 
     public void update() {
-        
+        //elevator conversion: rotations * 1.6 = inches
     }
 
     public void pushToDashboard() {
