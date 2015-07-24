@@ -1,12 +1,13 @@
 package org.texastorque.texastorque20155.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 
 public class Feedback {
 
-    private final double ELEVATOR_CONVERSION = 1.6 / 12;
+    private final double ELEVATOR_CONVERSION = 1.6;
 
     private TorqueEncoder elevatorEncoder;
 
@@ -25,7 +26,7 @@ public class Feedback {
     private double rightDriveAcceleration;
 
     private Feedback() {
-        elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, false, EncodingType.k4X);
+        elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, true, EncodingType.k4X);
 
 //        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B, false, EncodingType.k4X);
 //        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B, false, EncodingType.k4X);
