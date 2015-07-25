@@ -33,6 +33,9 @@ public class Elevator extends Subsystem {
 
     private double prevTime;
 
+    private Elevator() {
+    }
+
     @Override
     public void run() {
         position = feedback.getElevatorPosition();

@@ -27,7 +27,7 @@ public abstract class Subsystem {
 
     //run the subsystem (every 1/100 of a second)
     public abstract void run();
-    
+
     //send values to motors/pneumatics
     protected abstract void output();
 }

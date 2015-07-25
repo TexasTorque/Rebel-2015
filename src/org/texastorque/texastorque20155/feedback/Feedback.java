@@ -1,13 +1,12 @@
 package org.texastorque.texastorque20155.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 
 public class Feedback {
 
-    private final double ELEVATOR_CONVERSION = 1.6;
+    private final double ELEVATOR_CONVERSION = 1.6;//inches
 
     private TorqueEncoder elevatorEncoder;
 
@@ -33,7 +32,6 @@ public class Feedback {
     }
 
     public void update() {
-        //elevator conversion: rotations * (1.6 / 12) = height in feet
         elevatorEncoder.calc();
         elevatorPosition = (elevatorEncoder.get() / 250.0) * ELEVATOR_CONVERSION;
         elevatorVelocity = (elevatorEncoder.getRate() / 250.0) * ELEVATOR_CONVERSION;
@@ -81,7 +79,7 @@ public class Feedback {
     }
 
     public void resetElevatorEncoders() {
-//        elevatorEncoder.reset();
+        elevatorEncoder.reset();
     }
 
     public void resetDriveEncoders() {

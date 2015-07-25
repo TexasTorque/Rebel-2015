@@ -11,6 +11,9 @@ public class Intake extends Subsystem {
     private double leftSpeed;
     private double rightSpeed;
 
+    private Intake() {
+    }
+
     @Override
     public void run() {
         if (input.isAutonomous()) {
