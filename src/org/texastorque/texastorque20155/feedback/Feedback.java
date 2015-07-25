@@ -78,10 +78,6 @@ public class Feedback {
         return rightDriveAcceleration;
     }
 
-    public void resetElevatorEncoders() {
-        elevatorEncoder.reset();
-    }
-
     public void resetDriveEncoders() {
 //        leftDriveEncoder.reset();
 //        rightDriveEncoder.reset();

@@ -25,13 +25,13 @@ public class Input {
     private boolean O_X;
     private boolean O_A;
 
-    private boolean overrides;
+    private boolean override;
 
     private Input() {
         ds = DriverStation.getInstance();
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.12);
-        overrides = false;
+        override = false;
     }
 
     public void update() {
@@ -50,9 +50,9 @@ public class Input {
         O_A = operator.getAButton();
 
         if (operator.getLeftCenterButton()) {
-            overrides = true;
+            override = true;
         } else if (operator.getRightCenterButton()) {
-            overrides = false;
+            override = false;
         }
     }
 
@@ -90,7 +90,7 @@ public class Input {
         return O_X;
     }
 
-    public boolean getStabilizer() {
+    public boolean getToggleStabilizer() {
         return O_A;
     }
 
@@ -107,7 +107,7 @@ public class Input {
     }
 
     public boolean inOverride() {
-        return overrides;
+        return override;
     }
 
     public void pushToDashboard() {

@@ -52,6 +52,26 @@ public class Elevator extends Subsystem {
     }
 
     private void runAuto() {
+        if (mode.inOverride()) {
+            speed = mode.getElevatorOverrideSpeed();
+        } else {
+            setpoint = mode.getElevatorSetpoint();
+
+            if (setpoint != previousSetpoint) {
+                previousSetpoint = setpoint;
+                profile.generateTrapezoid(setpoint, position, velocity);
+            }
+
+            double dt = Timer.getFPGATimestamp() - prevTime;
+            profile.calculateNextSituation(dt);
+            prevTime = Timer.getFPGATimestamp();
+
+            targetPosition = profile.getCurrentPosition();
+            targetVelocity = profile.getCurrentVelocity();
+            targetAcceleration = profile.getCurrentAcceleration();
+
+            speed = pv.calculate(profile, position, velocity);
+        }
     }
 
     private void runTeleop() {

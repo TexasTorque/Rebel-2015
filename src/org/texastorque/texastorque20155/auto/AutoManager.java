@@ -10,26 +10,27 @@ public class AutoManager {
     private final int DRIVE_AUTO = 9;
 
     private Thread autoThread;
+    private AutoMode mode;
 
     private AutoManager() {
         SmartDashboard.putNumber("Autonomous Mode", 0);
     }
 
     public void init() {
-        autoThread = new Thread(getMode());
+        autoThread = new Thread(createAutoMode());
         autoThread.start();
     }
 
-    private AutoMode getMode() {
+    private AutoMode createAutoMode() {
         int modeChoice = (int) SmartDashboard.getNumber("Autonomous Mode", 0);
 
         switch (modeChoice) {
             case DO_NOTHING_AUTO:
-                return DoNothingAuto.getInstance();
+                return mode = DoNothingAuto.getInstance();
             case DRIVE_AUTO:
-                return new DriveAuto();
+                return mode = DriveAuto.getInstance();
             default:
-                return DoNothingAuto.getInstance();
+                return mode = DoNothingAuto.getInstance();
         }
     }
 
@@ -39,6 +40,10 @@ public class AutoManager {
 
     public Thread getAutoThread() {
         return autoThread;
+    }
+
+    public AutoMode getAutoMode() {
+        return mode;
     }
 
     //singleton

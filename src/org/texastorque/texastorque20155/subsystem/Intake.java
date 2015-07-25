@@ -26,6 +26,8 @@ public class Intake extends Subsystem {
     }
 
     private void runAuto() {
+        leftSpeed = mode.getLeftIntakeSpeed();
+        rightSpeed = mode.getRightIntakeSpeed();
     }
 
     private void runTeleop() {

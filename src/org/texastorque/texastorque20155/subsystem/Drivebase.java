@@ -1,5 +1,6 @@
 package org.texastorque.texastorque20155.subsystem;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePV;
@@ -31,17 +32,12 @@ public class Drivebase extends Subsystem {
     private TorquePV leftPV;
     private TorquePV rightPV;
 
-    private double targetLeftPosition;
-    private double targetRightPosition;
-
-    private double targetLeftVelocity;
-    private double targetRightVelocity;
-
-    private double targetLeftAcceleration;
-    private double targetRightAcceleration;
+    private double targetPosition;
+    private double targetVelocity;
+    private double targetAcceleration;
 
     private double setpoint;
-    private double prevSetpoint;
+    private double previousSetpoint;
 
     private double prevTime;
 
@@ -69,6 +65,30 @@ public class Drivebase extends Subsystem {
     }
 
     private void runAuto() {
+        if (mode.inOverride()) {
+            leftSpeed = mode.getLeftDriveOverrideSpeed();
+            rightSpeed = mode.getRightDriveOverrideSpeed();
+        } else {
+            setpoint = mode.getDrivebaseSetpoint();
+
+            if (setpoint != previousSetpoint) {
+                previousSetpoint = setpoint;
+                profile.generateTrapezoid(setpoint, 0.0, (leftSpeed + rightSpeed) / 2.0);
+
+                feedback.resetDriveEncoders();
+            }
+
+            double dt = Timer.getFPGATimestamp() - prevTime;
+            profile.calculateNextSituation(dt);
+            prevTime = Timer.getFPGATimestamp();
+
+            targetPosition = profile.getCurrentPosition();
+            targetVelocity = profile.getCurrentVelocity();
+            targetAcceleration = profile.getCurrentAcceleration();
+
+            leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
+            rightSpeed = leftPV.calculate(profile, rightPosition, rightVelocity);
+        }
     }
 
     private void runTeleop() {

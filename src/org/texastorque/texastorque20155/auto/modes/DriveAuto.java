@@ -6,9 +6,16 @@ public class DriveAuto extends AutoMode {
 
     @Override
     public void run() {
-        output.setDriveSpeed(1.0, 1.0);
-        pause(1.0);
-        output.setDriveSpeed(0.0, 0.0);
+        drivebaseSetpoint = 24.0;
     }
 
+    //singleton
+    private static DriveAuto instance;
+
+    public static DriveAuto getInstance() {
+        if (instance == null) {
+            instance = new DriveAuto();
+        }
+        return instance;
+    }
 }
