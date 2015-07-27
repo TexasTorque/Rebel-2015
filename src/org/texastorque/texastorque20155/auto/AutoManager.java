@@ -6,40 +6,26 @@ import org.texastorque.texastorque20155.auto.modes.DriveAuto;
 
 public class AutoManager {
 
-    private final int DO_NOTHING_AUTO = 0;
     private final int DRIVE_AUTO = 9;
 
-    private Thread autoThread;
     private AutoMode mode;
 
     private AutoManager() {
         SmartDashboard.putNumber("Autonomous Mode", 0);
+        SmartDashboard.putString("Running Auto Mode", "N/A");
     }
 
-    public void init() {
-        autoThread = new Thread(createAutoMode());
-        autoThread.start();
-    }
-
-    private AutoMode createAutoMode() {
+    public AutoMode createAutoMode() {
         int modeChoice = (int) SmartDashboard.getNumber("Autonomous Mode", 0);
 
         switch (modeChoice) {
-            case DO_NOTHING_AUTO:
-                return mode = DoNothingAuto.getInstance();
             case DRIVE_AUTO:
-                return mode = DriveAuto.getInstance();
+                SmartDashboard.putString("Running Auto Mode", "Drive Auto");
+                return mode = new DriveAuto();
             default:
-                return mode = DoNothingAuto.getInstance();
+                SmartDashboard.putString("Running Auto Mode", "Do Nothing Auto");
+                return mode = new DoNothingAuto();
         }
-    }
-
-    public void destroy() {
-        autoThread.interrupt();
-    }
-
-    public Thread getAutoThread() {
-        return autoThread;
     }
 
     public AutoMode getAutoMode() {

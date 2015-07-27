@@ -2,11 +2,14 @@ package org.texastorque.texastorque20155.input;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 
 public class Input {
 
-    private DriverStation ds;
+    private final DriverStation ds;
+    private double X_DRIVE_MULTIPLIER;
+    private double Y_DRIVE_MULTIPLIER;
 
     private GenericController driver;
     private GenericController operator;
@@ -16,8 +19,8 @@ public class Input {
 
     private boolean D_rightTrigger;
 
-    private double O_rightXAxis;
     private double O_rightYAxis;
+    private double O_leftXAxis;
     private double O_leftYAxis;
 
     private boolean O_Y;
@@ -36,14 +39,19 @@ public class Input {
         override = false;
     }
 
+    public void loadParams() {
+        X_DRIVE_MULTIPLIER = Constants.XBOX_X_DRIVE_MULTIPLIER.getDouble();
+        Y_DRIVE_MULTIPLIER = Constants.XBOX_Y_DRIVE_MULTIPLIER.getDouble();
+    }
+
     public void update() {
-        D_leftYAxis = driver.getLeftYAxis();
-        D_rightXAxis = driver.getRightXAxis();
+        D_rightXAxis = driver.getRightXAxis() * X_DRIVE_MULTIPLIER;
+        D_leftYAxis = driver.getLeftYAxis() * Y_DRIVE_MULTIPLIER;
 
         D_rightTrigger = driver.getRightTrigger();
 
-        O_rightXAxis = operator.getRightXAxis();
         O_rightYAxis = operator.getRightYAxis();
+        O_leftXAxis = operator.getLeftXAxis();
         O_leftYAxis = operator.getLeftYAxis();
 
         O_Y = operator.getYButton();
@@ -70,15 +78,15 @@ public class Input {
     }
 
     public double getLeftIntakeSpeed() {
-        return O_rightYAxis - O_rightXAxis;
+        return O_leftYAxis - O_leftXAxis;
     }
 
     public double getRightIntakeSpeed() {
-        return O_rightYAxis + O_rightXAxis;
+        return O_leftYAxis + O_leftXAxis;
     }
 
     public double getElevatorOverrideSpeed() {
-        return -O_leftYAxis;
+        return -O_rightYAxis;
     }
 
     public double getPlaceDriveSpeed() {
@@ -124,6 +132,7 @@ public class Input {
 
     public void pushToDashboard() {
         SmartDashboard.putBoolean("IsOperatorControl", isOperatorControlled());
+        SmartDashboard.putBoolean("IsAutonomous", isAutonomous());
         SmartDashboard.putBoolean("Overrides", inOverride());
     }
 

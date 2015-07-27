@@ -14,6 +14,8 @@ public class Elevator extends Subsystem {
     private double MAX_VELOCITY;
     private double MAX_ACCELERATION;
 
+    private boolean autoStacking;
+
     private double speed;
 
     private double position;
@@ -139,6 +141,8 @@ public class Elevator extends Subsystem {
         pv = new TorquePV();
 
         setpoint = feedback.getElevatorPosition();
+
+        autoStacking = false;
     }
 
     //singleton

@@ -11,9 +11,9 @@ public class Feedback {
 
     private TorqueEncoder elevatorEncoder;
 
-//    private TorqueEncoder leftDriveEncoder;
-//    private TorqueEncoder rightDriveEncoder;
-    
+    private TorqueEncoder leftDriveEncoder;
+    private TorqueEncoder rightDriveEncoder;
+
     private double elevatorPosition;
     private double elevatorVelocity;
     private double elevatorAcceleration;
@@ -29,26 +29,26 @@ public class Feedback {
     private Feedback() {
         elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, true, EncodingType.k4X);
 
-//        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B, false, EncodingType.k4X);
-//        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B, false, EncodingType.k4X);
+        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B, true, EncodingType.k4X);
+        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B, false, EncodingType.k4X);
     }
 
     public void update() {
         elevatorEncoder.calc();
-//        leftDriveEncoder.calc();
-//        rightDriveEncoder.calc();
-        
+        leftDriveEncoder.calc();
+        rightDriveEncoder.calc();
+
         elevatorPosition = elevatorEncoder.get() * ELEVATOR_CONVERSION;
         elevatorVelocity = elevatorEncoder.getRate() * ELEVATOR_CONVERSION;
         elevatorAcceleration = elevatorEncoder.getAcceleration() * ELEVATOR_CONVERSION;
-        
-//        leftDrivePosition = leftDriveEncoder.get() * DRIVEBASE_CONVERSION;
-//        leftDriveVelocity = leftDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
-//        leftDriveAcceleration = leftDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
-//        
-//        rightDrivePosition = rightDriveEncoder.get() * DRIVEBASE_CONVERSION;
-//        rightDriveVelocity = rightDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
-//        rightDriveAcceleration = rightDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
+
+        leftDrivePosition = leftDriveEncoder.get() * DRIVEBASE_CONVERSION;
+        leftDriveVelocity = leftDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
+        leftDriveAcceleration = leftDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
+
+        rightDrivePosition = rightDriveEncoder.get() * DRIVEBASE_CONVERSION;
+        rightDriveVelocity = rightDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
+        rightDriveAcceleration = rightDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
     }
 
     //getters

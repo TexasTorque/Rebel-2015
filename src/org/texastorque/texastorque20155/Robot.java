@@ -37,14 +37,18 @@ public class Robot extends TorqueIterative {
         subsystems.add(Elevator.getInstance());
         subsystems.add(CanHolder.getInstance());
         subsystems.add(Tail.getInstance());
-
-        numCycles = 0;
     }
 
     @Override
     public void autonomousInit() {
         Parameters.load();
-        autoManager.init();
+        input.loadParams();
+        subsystems.forEach((subsystem) -> {
+            subsystem.init();
+            subsystem.loadParams();
+        });
+
+        numCycles = 0;
     }
 
     @Override
@@ -55,16 +59,17 @@ public class Robot extends TorqueIterative {
     @Override
     public void autonomousContinuous() {
         feedback.update();
+
+        subsystems.forEach((subsystem) -> subsystem.run());
     }
 
     @Override
     public void teleopInit() {
-        autoManager.destroy();
-
         Parameters.load();
+        input.loadParams();
         subsystems.forEach((subsystem) -> {
-            subsystem.loadParams();
             subsystem.init();
+            subsystem.loadParams();
         });
 
         numCycles = 0;
@@ -77,11 +82,9 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopContinuous() {
-        //open
         input.update();
         feedback.update();
 
-        //process
         subsystems.forEach((subsystem) -> subsystem.run());
     }
 

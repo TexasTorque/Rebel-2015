@@ -1,15 +1,15 @@
 package org.texastorque.texastorque20155.auto;
 
+import org.texastorque.texastorque20155.output.Output;
+
 public abstract class AutoMode implements Runnable {
 
-    private final Thread autoThread;
-
-//    protected Output output;  ONLY add if dead reckoning is needed
+    protected Output output;//ONLY add if dead reckoning is needed
     //values
     protected double elevatorSetpoint;
     protected double drivebaseSetpoint;
 
-    protected double leftIntakeSpeed;
+    protected volatile double leftIntakeSpeed;
     protected double rightIntakeSpeed;
 
     protected boolean canHeld;
@@ -24,8 +24,7 @@ public abstract class AutoMode implements Runnable {
     protected double rightDriveSpeed;
 
     public AutoMode() {
-        autoThread = AutoManager.getInstance().getAutoThread();
-//        output = Output.getInstance();
+        output = Output.getInstance();
     }
 
     //get values
@@ -37,7 +36,7 @@ public abstract class AutoMode implements Runnable {
         return drivebaseSetpoint;
     }
 
-    public double getLeftIntakeSpeed() {
+    public synchronized double getLeftIntakeSpeed() {
         return leftIntakeSpeed;
     }
 
@@ -68,12 +67,5 @@ public abstract class AutoMode implements Runnable {
 
     public double getRightDriveOverrideSpeed() {
         return rightDriveSpeed;
-    }
-
-    protected final void pause(double seconds) {
-        try {
-            autoThread.wait((long) (seconds / 1000.0));
-        } catch (Exception e) {
-        }
     }
 }

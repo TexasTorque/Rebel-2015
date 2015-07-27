@@ -21,6 +21,7 @@ public class Output {
     private TorqueMotor rightElevatorMotor;
 
 //    private Solenoid canHolderSolenoid;
+//    private Solenoid tailSolenoid;
     private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
         leftDriveMini = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_MINI_MOTOR_PORT), false);
