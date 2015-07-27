@@ -6,12 +6,14 @@ import org.texastorque.torquelib.component.TorqueEncoder;
 
 public class Feedback {
 
-    private final double ELEVATOR_CONVERSION = 1.6;//inches
+    private final double ELEVATOR_CONVERSION = 0.0064;//inches
+    private final double DRIVEBASE_CONVERSION = 0.0503;
 
     private TorqueEncoder elevatorEncoder;
 
 //    private TorqueEncoder leftDriveEncoder;
 //    private TorqueEncoder rightDriveEncoder;
+    
     private double elevatorPosition;
     private double elevatorVelocity;
     private double elevatorAcceleration;
@@ -33,12 +35,20 @@ public class Feedback {
 
     public void update() {
         elevatorEncoder.calc();
-        elevatorPosition = (elevatorEncoder.get() / 250.0) * ELEVATOR_CONVERSION;
-        elevatorVelocity = (elevatorEncoder.getRate() / 250.0) * ELEVATOR_CONVERSION;
-        elevatorAcceleration = (elevatorEncoder.getAcceleration() / 250.0) * ELEVATOR_CONVERSION;
-    }
-
-    public void pushToDashboard() {
+//        leftDriveEncoder.calc();
+//        rightDriveEncoder.calc();
+        
+        elevatorPosition = elevatorEncoder.get() * ELEVATOR_CONVERSION;
+        elevatorVelocity = elevatorEncoder.getRate() * ELEVATOR_CONVERSION;
+        elevatorAcceleration = elevatorEncoder.getAcceleration() * ELEVATOR_CONVERSION;
+        
+//        leftDrivePosition = leftDriveEncoder.get() * DRIVEBASE_CONVERSION;
+//        leftDriveVelocity = leftDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
+//        leftDriveAcceleration = leftDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
+//        
+//        rightDrivePosition = rightDriveEncoder.get() * DRIVEBASE_CONVERSION;
+//        rightDriveVelocity = rightDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
+//        rightDriveAcceleration = rightDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
     }
 
     //getters

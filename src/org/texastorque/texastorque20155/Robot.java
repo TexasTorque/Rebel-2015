@@ -103,7 +103,6 @@ public class Robot extends TorqueIterative {
 
     private void updateDashboard() {
         input.pushToDashboard();
-        feedback.pushToDashboard();
         subsystems.forEach((subsystem) -> subsystem.pushToDashboard());
         SmartDashboard.putNumber("NumCycles", numCycles++);
     }
