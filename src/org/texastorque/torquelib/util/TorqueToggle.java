@@ -1,4 +1,4 @@
-package org.texastorque.torquelib.util.logging;
+package org.texastorque.torquelib.util;
 
 public class TorqueToggle {
 
