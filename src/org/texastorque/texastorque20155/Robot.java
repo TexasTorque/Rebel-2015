@@ -10,6 +10,7 @@ import org.texastorque.texastorque20155.subsystem.Drivebase;
 import org.texastorque.texastorque20155.subsystem.Elevator;
 import org.texastorque.texastorque20155.subsystem.Intake;
 import org.texastorque.texastorque20155.subsystem.Subsystem;
+import org.texastorque.texastorque20155.subsystem.Tail;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
 
@@ -35,6 +36,7 @@ public class Robot extends TorqueIterative {
         subsystems.add(Intake.getInstance());
         subsystems.add(Elevator.getInstance());
         subsystems.add(CanHolder.getInstance());
+        subsystems.add(Tail.getInstance());
 
         numCycles = 0;
     }

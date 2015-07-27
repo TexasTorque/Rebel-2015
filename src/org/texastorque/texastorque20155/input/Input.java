@@ -25,6 +25,8 @@ public class Input {
     private boolean O_X;
     private boolean O_A;
 
+    private boolean O_leftBumper;
+
     private boolean override;
 
     private Input() {
@@ -48,6 +50,8 @@ public class Input {
         O_B = operator.getBButton();
         O_X = operator.getXButton();
         O_A = operator.getAButton();
+
+        O_leftBumper = operator.getLeftBumper();
 
         if (operator.getLeftCenterButton()) {
             override = true;
@@ -92,6 +96,10 @@ public class Input {
 
     public boolean getToggleCanHolder() {
         return O_A;
+    }
+
+    public boolean getTailDown() {
+        return O_leftBumper;
     }
 
     public boolean getPlace() {

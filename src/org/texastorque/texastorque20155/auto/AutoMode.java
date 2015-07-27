@@ -13,6 +13,7 @@ public abstract class AutoMode implements Runnable {
     protected double rightIntakeSpeed;
 
     protected boolean canHeld;
+    protected boolean tailDown;
 
     //override values
     protected boolean override = false;
@@ -46,6 +47,10 @@ public abstract class AutoMode implements Runnable {
 
     public boolean isCanHeld() {
         return canHeld;
+    }
+
+    public boolean isTailDown() {
+        return tailDown;
     }
 
     //get override values
