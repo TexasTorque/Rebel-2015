@@ -90,7 +90,7 @@ public class Input {
         return O_X;
     }
 
-    public boolean getToggleStabilizer() {
+    public boolean getToggleCanHolder() {
         return O_A;
     }
 

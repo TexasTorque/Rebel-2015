@@ -27,5 +27,6 @@ public class Ports {
 
     //solenoids
     public static int CANHOLDER_SOLENOID_PORT = -1;
+    public static int TAIL_SOLENOID_PORT = -1;
 
 }

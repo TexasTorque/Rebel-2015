@@ -34,6 +34,7 @@ public class Output {
         rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
 
 //        canHolderSolenoid = new Solenoid(Ports.CANHOLDER_SOLENOID_PORT);
+//        tailSolenoid = new Solenoid(Ports.TAIL_SOLENOID_PORT);
         outputEnabled = true;
     }
 
@@ -70,13 +71,23 @@ public class Output {
         leftElevatorMotor.set(speed);
         rightElevatorMotor.set(speed);
     }
-//    public void setCanholder(boolean on) {
+
+    public void setCanHolder(boolean on) {
 //        if (!outputEnabled) {
 //            canHolderSolenoid.set(false);
 //            return;
 //        }
 //        canHolderSolenoid.set(on);
-//    }
+    }
+
+    public void setTail(boolean down) {
+//        if (!outputEnabled) {
+//            tailSolenoid.set(false);
+//            return;
+//        }
+//        tailSolenoid.set(down);
+    }
+
     //singleton
     private static Output instance;
 
