@@ -143,7 +143,7 @@ public class Drivebase extends Subsystem {
         leftPV = new TorquePV();
         rightPV = new TorquePV();
 
-        setpoint = feedback.getElevatorPosition();
+        setpoint = 0.0;
     }
 
     //singleton

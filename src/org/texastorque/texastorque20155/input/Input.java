@@ -81,6 +81,10 @@ public class Input {
         return -O_leftYAxis;
     }
 
+    public double getPlaceDriveSpeed() {
+        return -D_leftYAxis;
+    }
+
     //booleans
     public boolean getElevatorUp() {
         return O_Y;

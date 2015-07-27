@@ -80,7 +80,7 @@ public class Elevator extends Subsystem {
         } else {
             if (input.getElevatorUp()) {
                 setpoint = Constants.E_UP_POSITION.getDouble();
-            } else if (input.getElevatorDown()) {
+            } else if (input.getElevatorDown() || input.getPlace()) {
                 setpoint = Constants.E_DOWN_POSITION.getDouble();
             }
 
@@ -138,7 +138,7 @@ public class Elevator extends Subsystem {
         profile = new TorqueTMP(MAX_VELOCITY, MAX_ACCELERATION);
         pv = new TorquePV();
 
-        setpoint = 0.0;
+        setpoint = feedback.getElevatorPosition();
     }
 
     //singleton

@@ -31,8 +31,13 @@ public class Intake extends Subsystem {
     }
 
     private void runTeleop() {
-        leftSpeed = input.getLeftIntakeSpeed();
-        rightSpeed = input.getRightIntakeSpeed();
+        if (input.getPlace()) {
+            leftSpeed = input.getPlaceDriveSpeed();
+            rightSpeed = -input.getPlaceDriveSpeed();
+        } else {
+            leftSpeed = input.getLeftIntakeSpeed();
+            rightSpeed = input.getRightIntakeSpeed();
+        }
     }
 
     @Override
