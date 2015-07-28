@@ -38,8 +38,6 @@ public class Drivebase extends Subsystem {
 
     private double prevTime;
 
-    int a = 0;
-
     private Drivebase() {
     }
 
@@ -70,15 +68,11 @@ public class Drivebase extends Subsystem {
                 prevTime = Timer.getFPGATimestamp();
                 profile.calculateNextSituation(dt);
 
-                SmartDashboard.putNumber("cycles", a++);
+                profile.putToDashboard();
 
                 targetPosition = profile.getCurrentPosition();
                 targetVelocity = profile.getCurrentVelocity();
                 targetAcceleration = profile.getCurrentAcceleration();
-
-                SmartDashboard.putNumber("Drive Target Position", targetPosition);
-                SmartDashboard.putNumber("Drive Target Velocity", targetVelocity);
-                SmartDashboard.putNumber("Drive Target Acceleration", targetAcceleration);
 
                 leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
                 rightSpeed = rightPV.calculate(profile, rightPosition, rightVelocity);
@@ -112,6 +106,9 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("Left Drive Acceleration", leftAcceleration);
         SmartDashboard.putNumber("Right Drive Acceleration", rightAcceleration);
 
+        SmartDashboard.putNumber("Drive Target Position", targetPosition);
+        SmartDashboard.putNumber("Drive Target Velocity", targetVelocity);
+        SmartDashboard.putNumber("Drive Target Acceleration", targetAcceleration);
     }
 
     @Override

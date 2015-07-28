@@ -1,5 +1,7 @@
 package org.texastorque.torquelib.controlLoop;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Created by Gijs on 12/31/2014.
  */
@@ -190,10 +192,9 @@ public class TorqueTMP {
         }
     }
 
-    public String toString() {
-        System.out.println("P: " + getCurrentPosition());
-        System.out.println("V: " + getCurrentVelocity());
-        System.out.println("A: " + getCurrentAcceleration());
-        return "";
+    public void putToDashboard() {
+        SmartDashboard.putNumber("position", getCurrentPosition());
+        SmartDashboard.putNumber("velocity", getCurrentVelocity());
+        SmartDashboard.putNumber("acceleration", getCurrentAcceleration());
     }
 }

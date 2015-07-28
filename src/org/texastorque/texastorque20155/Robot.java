@@ -1,5 +1,6 @@
 package org.texastorque.texastorque20155;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import org.texastorque.texastorque20155.auto.AutoManager;
@@ -46,6 +47,7 @@ public class Robot extends TorqueIterative {
         Parameters.load();
         autoManager.reset();
         currentInput = autoManager.createAutoMode();
+        currentInput.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.setInput(currentInput);
             subsystem.init();
@@ -60,8 +62,6 @@ public class Robot extends TorqueIterative {
     @Override
     public void autonomousPeriodic() {
         updateDashboard();
-        
-        subsystems.forEach((subsystem) -> subsystem.run());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Robot extends TorqueIterative {
         currentInput.update();
         feedback.update();
 
-        
+        subsystems.forEach((subsystem) -> subsystem.run());
     }
 
     @Override
@@ -80,6 +80,7 @@ public class Robot extends TorqueIterative {
 
         Parameters.load();
         currentInput = new HumanInput();
+        currentInput.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.setInput(currentInput);
             subsystem.init();
@@ -118,6 +119,7 @@ public class Robot extends TorqueIterative {
 
     private void updateDashboard() {
         subsystems.forEach((subsystem) -> subsystem.pushToDashboard());
+        SmartDashboard.putBoolean("IsAutonomous", DriverStation.getInstance().isAutonomous());
         SmartDashboard.putNumber("NumCycles", numCycles++);
     }
 }

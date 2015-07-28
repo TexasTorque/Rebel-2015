@@ -1,7 +1,8 @@
 package org.texastorque.texastorque20155.output;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Relay.Value;
 import org.texastorque.texastorque20155.constants.Ports;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import org.texastorque.torquelib.component.TorqueMotor;
 
@@ -20,8 +21,9 @@ public class Output {
     private TorqueMotor leftElevatorMotor;
     private TorqueMotor rightElevatorMotor;
 
-//    private Solenoid canHolderSolenoid;
+    private DoubleSolenoid canHolderSolenoid;
 //    private Solenoid tailSolenoid;
+
     private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
         leftDriveMini = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_MINI_MOTOR_PORT), false);
@@ -34,7 +36,7 @@ public class Output {
         leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), true);
         rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
 
-//        canHolderSolenoid = new Solenoid(Ports.CANHOLDER_SOLENOID_PORT);
+        canHolderSolenoid = new DoubleSolenoid(Ports.CANHOLDER_SOLENOID_PORT_A, Ports.CANHOLDER_SOLENOID_PORT_B);
 //        tailSolenoid = new Solenoid(Ports.TAIL_SOLENOID_PORT);
         outputEnabled = true;
     }
@@ -74,11 +76,11 @@ public class Output {
     }
 
     public void setCanHolder(boolean on) {
-//        if (!outputEnabled) {
-//            canHolderSolenoid.set(false);
-//            return;
-//        }
-//        canHolderSolenoid.set(on);
+        if (!outputEnabled) {
+            canHolderSolenoid.set(DoubleSolenoid.Value.kForward);
+            return;
+        }
+        canHolderSolenoid.set(on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
 
     public void setTail(boolean down) {

@@ -1,5 +1,6 @@
 package org.texastorque.texastorque20155.input;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 
@@ -48,7 +49,7 @@ public class HumanInput extends Input {
         tailDown = operator.getLeftBumper();
         canHeld = operator.getAButton();
         autoStack = operator.getXButton();
-        
+
         if (driver.getRightTrigger()) {
             canHeld = false;
             autoStack = false;
