@@ -65,7 +65,7 @@ public class Elevator extends Subsystem {
     }
 
     @Override
-    public void output() {
+    protected void output() {
         speed = TorqueMathUtil.constrain(speed, MAX_SPEED);
         output.setElevatorSpeed(speed);
     }

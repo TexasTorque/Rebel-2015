@@ -33,5 +33,5 @@ public abstract class Subsystem {
     public abstract void run();
 
     //send values to robotoutput
-    public abstract void output();
+    protected abstract void output();
 }

@@ -26,7 +26,7 @@ public class Intake extends Subsystem {
     }
 
     @Override
-    public void output() {
+    protected void output() {
         leftSpeed = TorqueMathUtil.constrain(leftSpeed, MAX_SPEED);
         rightSpeed = TorqueMathUtil.constrain(rightSpeed, MAX_SPEED);
         output.setIntakeSpeed(leftSpeed, rightSpeed);

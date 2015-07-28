@@ -15,7 +15,7 @@ public class Tail extends Subsystem {
     }
 
     @Override
-    public void output() {
+    protected void output() {
         output.setTail(down);
     }
 

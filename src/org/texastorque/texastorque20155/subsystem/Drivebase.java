@@ -56,7 +56,7 @@ public class Drivebase extends Subsystem {
     }
 
     @Override
-    public void output() {
+    protected void output() {
         leftSpeed = TorqueMathUtil.constrain(leftSpeed, MAX_SPEED);
         rightSpeed = TorqueMathUtil.constrain(rightSpeed, MAX_SPEED);
         output.setDriveSpeed(leftSpeed, rightSpeed);

@@ -13,9 +13,9 @@ public class CanHolder extends Subsystem {
     public void run() {
         holding = input.isCanHeld();
     }
-    
+
     @Override
-    public void output() {
+    protected void output() {
         output.setCanHolder(holding);
     }
 
