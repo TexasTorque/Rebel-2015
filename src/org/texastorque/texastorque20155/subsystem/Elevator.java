@@ -11,8 +11,6 @@ public class Elevator extends Subsystem {
 
     private double MAX_SPEED;
 
-    private boolean autoStacking;
-
     private double speed;
 
     private double position;
@@ -93,7 +91,6 @@ public class Elevator extends Subsystem {
         pv = new TorquePV();
 
         setpoint = feedback.getElevatorPosition();
-        autoStacking = false;
 
         pv.setGains(Constants.E_PV_P.getDouble(),
                 Constants.E_PV_V.getDouble(),

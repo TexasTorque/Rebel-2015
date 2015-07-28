@@ -27,7 +27,7 @@ public abstract class Input {
 
     //update input
     public abstract void update();
-    
+
     public double getElevatorSetpoint() {
         return elevatorSetpoint;
     }
