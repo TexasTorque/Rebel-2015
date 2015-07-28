@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import org.texastorque.texastorque20155.auto.AutoManager;
 import org.texastorque.texastorque20155.feedback.Feedback;
-import org.texastorque.texastorque20155.input.HumanInput;
 import org.texastorque.texastorque20155.input.Input;
 import org.texastorque.texastorque20155.subsystem.CanHolder;
 import org.texastorque.texastorque20155.subsystem.Drivebase;
@@ -20,6 +19,8 @@ public class Robot extends TorqueIterative {
     private int numCycles;
 
     private AutoManager autoManager;
+    private Thread autoThread;
+
     private Feedback feedback;
     private Input currentInput;
 
@@ -43,7 +44,7 @@ public class Robot extends TorqueIterative {
     public void autonomousInit() {
         currentInput = autoManager.createAutoMode();
         subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
-        
+
         Parameters.load();
         subsystems.forEach((subsystem) -> {
             subsystem.init();
@@ -51,6 +52,9 @@ public class Robot extends TorqueIterative {
         });
 
         numCycles = 0;
+
+        autoThread = new Thread(autoManager.getAutoMode());
+        autoThread.start();
     }
 
     @Override
@@ -68,6 +72,10 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopInit() {
+        if (autoThread != null) {
+            autoThread.interrupt();
+        }
+
         Parameters.load();
         subsystems.forEach((subsystem) -> {
             subsystem.init();

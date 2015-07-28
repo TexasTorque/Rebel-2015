@@ -45,6 +45,6 @@ public class HumanInput extends Input {
 
         tailDown = operator.getLeftBumper();
         canHeld = operator.getAButton();
-        
+        autoStack = operator.getXButton();
     }
 }
