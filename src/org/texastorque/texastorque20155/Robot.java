@@ -43,11 +43,12 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void autonomousInit() {
-        currentInput = autoManager.createAutoMode();
-        subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
-
         Parameters.load();
-        subsystems.forEach((subsystem) -> subsystem.init());
+        currentInput = autoManager.createAutoMode();
+        subsystems.forEach((subsystem) -> {
+            subsystem.setInput(currentInput);
+            subsystem.init();
+        });
 
         numCycles = 0;
 
@@ -74,11 +75,12 @@ public class Robot extends TorqueIterative {
             autoThread.interrupt();
         }
 
-        currentInput = new HumanInput();
-        subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
-
         Parameters.load();
-        subsystems.forEach((subsystem) -> subsystem.init());
+        currentInput = new HumanInput();
+        subsystems.forEach((subsystem) -> {
+            subsystem.setInput(currentInput);
+            subsystem.init();
+        });
 
         numCycles = 0;
     }
