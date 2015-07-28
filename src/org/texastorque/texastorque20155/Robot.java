@@ -44,7 +44,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void autonomousInit() {
         Parameters.load();
-        currentInput = autoManager.createAutoMode();
+        currentInput = autoManager.getAutoMode();
         subsystems.forEach((subsystem) -> {
             subsystem.setInput(currentInput);
             subsystem.init();

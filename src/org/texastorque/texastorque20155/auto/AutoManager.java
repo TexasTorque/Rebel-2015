@@ -15,21 +15,21 @@ public class AutoManager {
         SmartDashboard.putString("Running Auto Mode", "N/A");
     }
 
-    public AutoMode createAutoMode() {
-        int modeChoice = (int) SmartDashboard.getNumber("Autonomous Mode", 0);
-
-        switch (modeChoice) {
-            case DRIVE_AUTO:
-                SmartDashboard.putString("Running Auto Mode", "Drive Auto");
-                return mode = new DriveAuto();
-            default:
-                SmartDashboard.putString("Running Auto Mode", "Do Nothing Auto");
-                return mode = new DoNothingAuto();
-        }
-    }
-
     public AutoMode getAutoMode() {
-        return mode;
+        if (mode == null) {
+            int modeChoice = (int) SmartDashboard.getNumber("Autonomous Mode", 0);
+
+            switch (modeChoice) {
+                case DRIVE_AUTO:
+                    SmartDashboard.putString("Running Auto Mode", "Drive Auto");
+                    return mode = new DriveAuto();
+                default:
+                    SmartDashboard.putString("Running Auto Mode", "Do Nothing Auto");
+                    return mode = new DoNothingAuto();
+            }
+        } else {
+            return mode;
+        }
     }
 
     //singleton
