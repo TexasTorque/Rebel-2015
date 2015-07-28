@@ -8,9 +8,10 @@ public abstract class Input {
     protected double leftIntakeSpeed;
     protected double rightIntakeSpeed;
 
-    protected boolean canHeld;
-    protected boolean tailDown;
-    protected boolean placing;
+    protected boolean canHeld = false;
+    protected boolean tailDown = false;
+    protected boolean placing = false;
+    protected boolean autoStack = false;
 
     //override values
     protected boolean override = false;
@@ -20,9 +21,13 @@ public abstract class Input {
     protected double leftDriveSpeed;
     protected double rightDriveSpeed;
     protected double placeDriveSpeed;
-    
+
+    //load parameters for input
     public abstract void loadParams();
 
+    //update input
+    public abstract void update();
+    
     public double getElevatorSetpoint() {
         return elevatorSetpoint;
     }

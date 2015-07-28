@@ -22,6 +22,7 @@ public class HumanInput extends Input {
         Y_DRIVE_MULTIPLIER = Constants.XBOX_Y_DRIVE_MULTIPLIER.getDouble();
     }
 
+    @Override
     public void update() {
         if (operator.getLeftCenterButton()) {
             override = true;
@@ -44,5 +45,6 @@ public class HumanInput extends Input {
 
         tailDown = operator.getLeftBumper();
         canHeld = operator.getAButton();
+        
     }
 }

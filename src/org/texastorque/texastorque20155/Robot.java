@@ -60,6 +60,7 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void autonomousContinuous() {
+        currentInput.update();
         feedback.update();
 
         subsystems.forEach((subsystem) -> subsystem.run());
@@ -83,6 +84,7 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopContinuous() {
+        currentInput.update();
         feedback.update();
 
         subsystems.forEach((subsystem) -> subsystem.run());

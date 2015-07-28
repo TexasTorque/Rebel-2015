@@ -10,7 +10,14 @@ public abstract class AutoMode extends Input implements Runnable {
     public AutoMode() {
         output = Output.getInstance();
     }
-    
+
+    @Override
     public void loadParams() {
+        //method stub - won't do anything in auto
+    }
+
+    @Override
+    public void update() {
+        //method stub - won't do anything in auto
     }
 }
