@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import org.texastorque.texastorque20155.auto.AutoManager;
 import org.texastorque.texastorque20155.feedback.Feedback;
+import org.texastorque.texastorque20155.input.HumanInput;
 import org.texastorque.texastorque20155.input.Input;
 import org.texastorque.texastorque20155.subsystem.CanHolder;
 import org.texastorque.texastorque20155.subsystem.Drivebase;
@@ -75,6 +76,9 @@ public class Robot extends TorqueIterative {
         if (autoThread != null) {
             autoThread.interrupt();
         }
+
+        currentInput = new HumanInput();
+        subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
 
         Parameters.load();
         subsystems.forEach((subsystem) -> {

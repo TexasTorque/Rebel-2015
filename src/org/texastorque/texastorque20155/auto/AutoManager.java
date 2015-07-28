@@ -5,7 +5,7 @@ import org.texastorque.texastorque20155.auto.modes.DoNothingAuto;
 import org.texastorque.texastorque20155.auto.modes.DriveAuto;
 
 public class AutoManager {
-    
+
     private final int DRIVE_AUTO = 9;
 
     private AutoMode mode;
@@ -27,7 +27,7 @@ public class AutoManager {
                 return mode = new DoNothingAuto();
         }
     }
-    
+
     public AutoMode getAutoMode() {
         return mode;
     }
