@@ -1,148 +1,73 @@
 package org.texastorque.texastorque20155.input;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.texastorque.texastorque20155.constants.Constants;
-import org.texastorque.torquelib.util.GenericController;
+public abstract class Input {
 
-public class Input {
+    protected double elevatorSetpoint;
+    protected double drivebaseSetpoint;
 
-    private final DriverStation ds;
-    private double X_DRIVE_MULTIPLIER;
-    private double Y_DRIVE_MULTIPLIER;
+    protected double leftIntakeSpeed;
+    protected double rightIntakeSpeed;
 
-    private GenericController driver;
-    private GenericController operator;
+    protected boolean canHeld;
+    protected boolean tailDown;
+    protected boolean placing;
 
-    private double D_leftYAxis;
-    private double D_rightXAxis;
+    //override values
+    protected boolean override = false;
 
-    private boolean D_rightTrigger;
+    protected double elevatorSpeed;
 
-    private double O_rightYAxis;
-    private double O_leftXAxis;
-    private double O_leftYAxis;
+    protected double leftDriveSpeed;
+    protected double rightDriveSpeed;
+    protected double placeDriveSpeed;
+    
+    public abstract void loadParams();
 
-    private boolean O_Y;
-    private boolean O_B;
-    private boolean O_X;
-    private boolean O_A;
-
-    private boolean O_leftBumper;
-
-    private boolean override;
-
-    private Input() {
-        ds = DriverStation.getInstance();
-        driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
-        operator = new GenericController(1, GenericController.TYPE_XBOX, 0.12);
-        override = false;
+    public double getElevatorSetpoint() {
+        return elevatorSetpoint;
     }
 
-    public void loadParams() {
-        X_DRIVE_MULTIPLIER = Constants.XBOX_X_DRIVE_MULTIPLIER.getDouble();
-        Y_DRIVE_MULTIPLIER = Constants.XBOX_Y_DRIVE_MULTIPLIER.getDouble();
-    }
-
-    public void update() {
-        D_rightXAxis = driver.getRightXAxis() * X_DRIVE_MULTIPLIER;
-        D_leftYAxis = driver.getLeftYAxis() * Y_DRIVE_MULTIPLIER;
-
-        D_rightTrigger = driver.getRightTrigger();
-
-        O_rightYAxis = operator.getRightYAxis();
-        O_leftXAxis = operator.getLeftXAxis();
-        O_leftYAxis = operator.getLeftYAxis();
-
-        O_Y = operator.getYButton();
-        O_B = operator.getBButton();
-        O_X = operator.getXButton();
-        O_A = operator.getAButton();
-
-        O_leftBumper = operator.getLeftBumper();
-
-        if (operator.getLeftCenterButton()) {
-            override = true;
-        } else if (operator.getRightCenterButton()) {
-            override = false;
-        }
-    }
-
-    //numbers
-    public double getLeftDriveSpeed() {
-        return -D_leftYAxis + D_rightXAxis;
-    }
-
-    public double getRightDriveSpeed() {
-        return -D_leftYAxis - D_rightXAxis;
+    public double getDrivebaseSetpoint() {
+        return drivebaseSetpoint;
     }
 
     public double getLeftIntakeSpeed() {
-        return O_leftYAxis - O_leftXAxis;
+        return leftIntakeSpeed;
     }
 
     public double getRightIntakeSpeed() {
-        return O_leftYAxis + O_leftXAxis;
+        return rightIntakeSpeed;
     }
 
-    public double getElevatorOverrideSpeed() {
-        return -O_rightYAxis;
+    public boolean isCanHeld() {
+        return canHeld;
     }
 
-    public double getPlaceDriveSpeed() {
-        return -D_leftYAxis;
+    public boolean isTailDown() {
+        return tailDown;
     }
 
-    //booleans
-    public boolean getElevatorUp() {
-        return O_Y;
+    public boolean isPlacing() {
+        return placing;
     }
 
-    public boolean getElevatorDown() {
-        return O_B;
-    }
-
-    public boolean getToggleAutoStack() {
-        return O_X;
-    }
-
-    public boolean getToggleCanHolder() {
-        return O_A;
-    }
-
-    public boolean getTailDown() {
-        return O_leftBumper;
-    }
-
-    public boolean getPlace() {
-        return D_rightTrigger;
-    }
-
-    public boolean isAutonomous() {
-        return ds.isAutonomous();
-    }
-
-    public boolean isOperatorControlled() {
-        return ds.isOperatorControl();
-    }
-
-    public boolean inOverride() {
+    public boolean isOverride() {
         return override;
     }
 
-    public void pushToDashboard() {
-        SmartDashboard.putBoolean("IsOperatorControl", isOperatorControlled());
-        SmartDashboard.putBoolean("IsAutonomous", isAutonomous());
-        SmartDashboard.putBoolean("Overrides", inOverride());
+    public double getElevatorSpeed() {
+        return elevatorSpeed;
     }
 
-    //singleton
-    private static Input instance;
+    public double getLeftDriveSpeed() {
+        return leftDriveSpeed;
+    }
 
-    public static Input getInstance() {
-        if (instance == null) {
-            instance = new Input();
-        }
-        return instance;
+    public double getRightDriveSpeed() {
+        return rightDriveSpeed;
+    }
+
+    public double getPlaceDriveSpeed() {
+        return placeDriveSpeed;
     }
 }

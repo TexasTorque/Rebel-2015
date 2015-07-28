@@ -8,16 +8,19 @@ import org.texastorque.texastorque20155.output.Output;
 
 public abstract class Subsystem {
 
-    protected final Input input;
+    protected Input input;
     protected final Feedback feedback;
     protected final Output output;
     protected final AutoMode mode;
 
     public Subsystem() {
-        input = Input.getInstance();
         feedback = Feedback.getInstance();
         output = Output.getInstance();
         mode = AutoManager.getInstance().getAutoMode();
+    }
+
+    public final void setInput(Input input_) {
+        input = input_;
     }
 
     //load parameters (eg PID constants, speeds, timing)
@@ -31,7 +34,7 @@ public abstract class Subsystem {
 
     //run the subsystem (every 1/100 of a second)
     public abstract void run();
-
-    //send values to motors/pneumatics
-    protected abstract void output();
+    
+    //send values to robotoutput
+    public abstract void output();
 }

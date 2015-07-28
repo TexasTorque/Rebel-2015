@@ -55,49 +55,12 @@ public class Drivebase extends Subsystem {
         leftAcceleration = feedback.getLeftDriveAcceleration();
         rightAcceleration = feedback.getRightDriveAcceleration();
 
-        if (input.isAutonomous()) {
-            runAuto();
-            output();
-        } else if (input.isOperatorControlled()) {
-            runTeleop();
-            output();
-        }
-    }
-
-    private void runAuto() {
-        if (mode.inOverride()) {
-            leftSpeed = mode.getLeftDriveOverrideSpeed();
-            rightSpeed = mode.getRightDriveOverrideSpeed();
-        } else {
-            setpoint = mode.getDrivebaseSetpoint();
-
-            if (setpoint != previousSetpoint) {
-                previousSetpoint = setpoint;
-                profile.generateTrapezoid(setpoint, 0.0, (leftSpeed + rightSpeed) / 2.0);
-
-                feedback.resetDriveEncoders();
-            }
-
-            double dt = Timer.getFPGATimestamp() - prevTime;
-            profile.calculateNextSituation(dt);
-            prevTime = Timer.getFPGATimestamp();
-
-            targetPosition = profile.getCurrentPosition();
-            targetVelocity = profile.getCurrentVelocity();
-            targetAcceleration = profile.getCurrentAcceleration();
-
-            leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
-            rightSpeed = leftPV.calculate(profile, rightPosition, rightVelocity);
-        }
-    }
-
-    private void runTeleop() {
         leftSpeed = input.getLeftDriveSpeed();
         rightSpeed = input.getRightDriveSpeed();
     }
 
     @Override
-    protected void output() {
+    public void output() {
         leftSpeed = TorqueMathUtil.constrain(leftSpeed, MAX_SPEED);
         rightSpeed = TorqueMathUtil.constrain(rightSpeed, MAX_SPEED);
         output.setDriveSpeed(leftSpeed, rightSpeed);

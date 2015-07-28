@@ -11,25 +11,11 @@ public class Tail extends Subsystem {
 
     @Override
     public void run() {
-        if (input.isAutonomous()) {
-            runAuto();
-            output();
-        } else if (input.isOperatorControlled()) {
-            runTeleop();
-            output();
-        }
-    }
-
-    private void runAuto() {
-        down = mode.isTailDown();
-    }
-
-    private void runTeleop() {
-        down = input.getTailDown();
+        down = input.isTailDown();
     }
 
     @Override
-    protected void output() {
+    public void output() {
         output.setTail(down);
     }
 

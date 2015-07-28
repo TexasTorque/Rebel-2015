@@ -16,22 +16,7 @@ public class Intake extends Subsystem {
 
     @Override
     public void run() {
-        if (input.isAutonomous()) {
-            runAuto();
-            output();
-        } else if (input.isOperatorControlled()) {
-            runTeleop();
-            output();
-        }
-    }
-
-    private void runAuto() {
-        leftSpeed = mode.getLeftIntakeSpeed();
-        rightSpeed = mode.getRightIntakeSpeed();
-    }
-
-    private void runTeleop() {
-        if (input.getPlace()) {
+        if (input.isPlacing()) {
             leftSpeed = input.getPlaceDriveSpeed();
             rightSpeed = -input.getPlaceDriveSpeed();
         } else {
@@ -41,7 +26,7 @@ public class Intake extends Subsystem {
     }
 
     @Override
-    protected void output() {
+    public void output() {
         leftSpeed = TorqueMathUtil.constrain(leftSpeed, MAX_SPEED);
         rightSpeed = TorqueMathUtil.constrain(rightSpeed, MAX_SPEED);
         output.setIntakeSpeed(leftSpeed, rightSpeed);

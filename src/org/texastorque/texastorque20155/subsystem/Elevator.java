@@ -44,20 +44,10 @@ public class Elevator extends Subsystem {
         velocity = feedback.getElevatorVelocity();
         accelertion = feedback.getElevatorAcceleration();
 
-        if (input.isAutonomous()) {
-            runAuto();
-            output();
-        } else if (input.isOperatorControlled()) {
-            runTeleop();
-            output();
-        }
-    }
-
-    private void runAuto() {
-        if (mode.inOverride()) {
-            speed = mode.getElevatorOverrideSpeed();
+        if (input.isOverride()) {
+            speed = input.getElevatorSpeed();
         } else {
-            setpoint = mode.getElevatorSetpoint();
+            setpoint = input.getElevatorSetpoint();
 
             if (setpoint != previousSetpoint) {
                 previousSetpoint = setpoint;
@@ -73,38 +63,14 @@ public class Elevator extends Subsystem {
             targetAcceleration = profile.getCurrentAcceleration();
 
             speed = pv.calculate(profile, position, velocity);
-        }
-    }
 
-    private void runTeleop() {
-        if (input.inOverride()) {
-            speed = input.getElevatorOverrideSpeed();
-        } else {
-            if (input.getElevatorUp()) {
-                setpoint = Constants.E_UP_POSITION.getDouble();
-            } else if (input.getElevatorDown() || input.getPlace()) {
-                setpoint = Constants.E_DOWN_POSITION.getDouble();
-            }
-
-            if (setpoint != previousSetpoint) {
-                previousSetpoint = setpoint;
-                profile.generateTrapezoid(setpoint, position, velocity);
-            }
-
-            double dt = Timer.getFPGATimestamp() - prevTime;
-            profile.calculateNextSituation(Timer.getFPGATimestamp() - prevTime);
-            prevTime = Timer.getFPGATimestamp();
-
-            targetPosition = profile.getCurrentPosition();
-            targetVelocity = profile.getCurrentVelocity();
-            targetAcceleration = profile.getCurrentAcceleration();
-
-            speed = pv.calculate(profile, position, velocity);
+            speed = TorqueMathUtil.constrain(speed, MAX_SPEED);
+            output.setElevatorSpeed(speed);
         }
     }
 
     @Override
-    protected void output() {
+    public void output() {
         speed = TorqueMathUtil.constrain(speed, MAX_SPEED);
         output.setElevatorSpeed(speed);
     }

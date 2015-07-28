@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import org.texastorque.texastorque20155.auto.AutoManager;
 import org.texastorque.texastorque20155.feedback.Feedback;
+import org.texastorque.texastorque20155.input.HumanInput;
 import org.texastorque.texastorque20155.input.Input;
 import org.texastorque.texastorque20155.subsystem.CanHolder;
 import org.texastorque.texastorque20155.subsystem.Drivebase;
@@ -20,7 +21,7 @@ public class Robot extends TorqueIterative {
 
     private AutoManager autoManager;
     private Feedback feedback;
-    private Input input;
+    private Input currentInput;
 
     private ArrayList<Subsystem> subsystems;
 
@@ -29,7 +30,6 @@ public class Robot extends TorqueIterative {
         Parameters.load();
         autoManager = AutoManager.getInstance();
         feedback = Feedback.getInstance();
-        input = Input.getInstance();
 
         subsystems = new ArrayList<>();
         subsystems.add(Drivebase.getInstance());
@@ -41,8 +41,10 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void autonomousInit() {
+        currentInput = autoManager.createAutoMode();
+        subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
+        
         Parameters.load();
-        input.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.init();
             subsystem.loadParams();
@@ -66,7 +68,6 @@ public class Robot extends TorqueIterative {
     @Override
     public void teleopInit() {
         Parameters.load();
-        input.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.init();
             subsystem.loadParams();
@@ -82,7 +83,6 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopContinuous() {
-        input.update();
         feedback.update();
 
         subsystems.forEach((subsystem) -> subsystem.run());
@@ -100,12 +100,10 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void disabledContinuous() {
-        input.update();
         feedback.update();
     }
 
     private void updateDashboard() {
-        input.pushToDashboard();
         subsystems.forEach((subsystem) -> subsystem.pushToDashboard());
         SmartDashboard.putNumber("NumCycles", numCycles++);
     }

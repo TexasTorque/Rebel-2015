@@ -11,25 +11,11 @@ public class CanHolder extends Subsystem {
 
     @Override
     public void run() {
-        if (input.isAutonomous()) {
-            runAuto();
-            output();
-        } else if (input.isOperatorControlled()) {
-            runTeleop();
-            output();
-        }
+        holding = input.isCanHeld();
     }
-
-    private void runAuto() {
-        holding = mode.isCanHeld();
-    }
-
-    private void runTeleop() {
-        holding = input.getToggleCanHolder();
-    }
-
+    
     @Override
-    protected void output() {
+    public void output() {
         output.setCanHolder(holding);
     }
 
