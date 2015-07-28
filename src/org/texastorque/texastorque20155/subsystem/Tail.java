@@ -12,6 +12,7 @@ public class Tail extends Subsystem {
     @Override
     public void run() {
         down = input.isTailDown();
+        output();
     }
 
     @Override

@@ -60,8 +60,8 @@ public class Elevator extends Subsystem {
             speed = pv.calculate(profile, position, velocity);
 
             speed = TorqueMathUtil.constrain(speed, MAX_SPEED);
-            output.setElevatorSpeed(speed);
         }
+        output();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Elevator extends Subsystem {
                 Constants.E_MAX_ACCELERATION.getDouble());
         pv = new TorquePV();
 
-        setpoint = feedback.getElevatorPosition();
+        setpoint = Constants.E_DOWN_POSITION.getDouble();
 
         pv.setGains(Constants.E_PV_P.getDouble(),
                 Constants.E_PV_V.getDouble(),

@@ -1,5 +1,6 @@
 package org.texastorque.texastorque20155.subsystem;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePV;
@@ -37,6 +38,8 @@ public class Drivebase extends Subsystem {
 
     private double prevTime;
 
+    int a = 0;
+
     private Drivebase() {
     }
 
@@ -51,8 +54,41 @@ public class Drivebase extends Subsystem {
         leftAcceleration = feedback.getLeftDriveAcceleration();
         rightAcceleration = feedback.getRightDriveAcceleration();
 
-        leftSpeed = input.getLeftDriveSpeed();
-        rightSpeed = input.getRightDriveSpeed();
+        if (ds.isAutonomous()) {
+            if (input.isOverride()) {
+                leftSpeed = input.getLeftDriveSpeed();
+                rightSpeed = input.getRightDriveSpeed();
+            } else {
+                setpoint = input.getDrivebaseSetpoint();
+                if (setpoint != previousSetpoint) {
+                    previousSetpoint = setpoint;
+                    feedback.resetDriveEncoders();
+                    profile.generateTrapezoid(setpoint, 0.0, 0.0);
+                }
+
+                double dt = Timer.getFPGATimestamp() - prevTime;
+                prevTime = Timer.getFPGATimestamp();
+                profile.calculateNextSituation(dt);
+
+                SmartDashboard.putNumber("cycles", a++);
+
+                targetPosition = profile.getCurrentPosition();
+                targetVelocity = profile.getCurrentVelocity();
+                targetAcceleration = profile.getCurrentAcceleration();
+
+                SmartDashboard.putNumber("Drive Target Position", targetPosition);
+                SmartDashboard.putNumber("Drive Target Velocity", targetVelocity);
+                SmartDashboard.putNumber("Drive Target Acceleration", targetAcceleration);
+
+                leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
+                rightSpeed = rightPV.calculate(profile, rightPosition, rightVelocity);
+            }
+        } else {
+            leftSpeed = input.getLeftDriveSpeed();
+            rightSpeed = input.getRightDriveSpeed();
+        }
+
+        output();
     }
 
     @Override
@@ -75,6 +111,7 @@ public class Drivebase extends Subsystem {
 
         SmartDashboard.putNumber("Left Drive Acceleration", leftAcceleration);
         SmartDashboard.putNumber("Right Drive Acceleration", rightAcceleration);
+
     }
 
     @Override

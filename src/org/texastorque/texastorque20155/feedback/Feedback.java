@@ -89,8 +89,8 @@ public class Feedback {
     }
 
     public void resetDriveEncoders() {
-//        leftDriveEncoder.reset();
-//        rightDriveEncoder.reset();
+        leftDriveEncoder.reset();
+        rightDriveEncoder.reset();
     }
 
     //singleton

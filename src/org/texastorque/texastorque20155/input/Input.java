@@ -10,7 +10,6 @@ public abstract class Input {
 
     protected boolean canHeld = false;
     protected boolean tailDown = false;
-    protected boolean placing = false;
     protected boolean autoStack = false;
 
     //override values
@@ -50,10 +49,6 @@ public abstract class Input {
 
     public boolean isTailDown() {
         return tailDown;
-    }
-
-    public boolean isPlacing() {
-        return placing;
     }
 
     public boolean isOverride() {

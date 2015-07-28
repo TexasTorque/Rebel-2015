@@ -4,7 +4,7 @@ import org.texastorque.torquelib.util.Parameters;
 
 public class Constants extends Parameters {
 
-    public static final Constant TUNED_VOLTAGE = new Constant("TUNED_VOLTAGE", 12.6);
+    public static final Constant TUNED_VOLTAGE = new Constant("TUNED_VOLTAGE", 12.2);
 
     public static final Constant XBOX_X_DRIVE_MULTIPLIER = new Constant("XBOX_X_DRIVE_MULTIPLIER", 1.0);
     public static final Constant XBOX_Y_DRIVE_MULTIPLIER = new Constant("XBOX_Y_DRIVE_MULTIPLIER", 1.0);

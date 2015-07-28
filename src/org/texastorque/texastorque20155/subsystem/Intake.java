@@ -16,13 +16,9 @@ public class Intake extends Subsystem {
 
     @Override
     public void run() {
-        if (input.isPlacing()) {
-            leftSpeed = input.getPlaceDriveSpeed();
-            rightSpeed = -input.getPlaceDriveSpeed();
-        } else {
-            leftSpeed = input.getLeftIntakeSpeed();
-            rightSpeed = input.getRightIntakeSpeed();
-        }
+        leftSpeed = input.getLeftIntakeSpeed();
+        rightSpeed = input.getRightIntakeSpeed();
+        output();
     }
 
     @Override
