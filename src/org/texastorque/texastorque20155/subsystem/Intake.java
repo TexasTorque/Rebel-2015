@@ -40,10 +40,6 @@ public class Intake extends Subsystem {
 
     @Override
     public void init() {
-    }
-
-    @Override
-    public void loadParams() {
         MAX_SPEED = Constants.I_MAX_SPEED.getDouble();
     }
 

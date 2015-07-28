@@ -47,10 +47,7 @@ public class Robot extends TorqueIterative {
         subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
 
         Parameters.load();
-        subsystems.forEach((subsystem) -> {
-            subsystem.init();
-            subsystem.loadParams();
-        });
+        subsystems.forEach((subsystem) -> subsystem.init());
 
         numCycles = 0;
 
@@ -81,10 +78,7 @@ public class Robot extends TorqueIterative {
         subsystems.forEach((subsystem) -> subsystem.setInput(currentInput));
 
         Parameters.load();
-        subsystems.forEach((subsystem) -> {
-            subsystem.init();
-            subsystem.loadParams();
-        });
+        subsystems.forEach((subsystem) -> subsystem.init());
 
         numCycles = 0;
     }

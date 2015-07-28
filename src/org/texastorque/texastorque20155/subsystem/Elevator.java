@@ -11,9 +11,6 @@ public class Elevator extends Subsystem {
 
     private double MAX_SPEED;
 
-    private double MAX_VELOCITY;
-    private double MAX_ACCELERATION;
-
     private boolean autoStacking;
 
     private double speed;
@@ -76,20 +73,6 @@ public class Elevator extends Subsystem {
     }
 
     @Override
-    public void loadParams() {
-        MAX_SPEED = Constants.E_MAX_SPEED.getDouble();
-
-        MAX_VELOCITY = Constants.E_MAX_VELOCITY.getDouble();
-        MAX_ACCELERATION = Constants.E_MAX_ACCELERATION.getDouble();
-
-        pv.setGains(Constants.E_PV_P.getDouble(),
-                Constants.E_PV_V.getDouble(),
-                Constants.E_PV_ffP.getDouble(),
-                Constants.E_PV_ffV.getDouble());
-        pv.setTunedVoltage(Constants.TUNED_VOLTAGE.getDouble());
-    }
-
-    @Override
     public void pushToDashboard() {
         SmartDashboard.putNumber("Elevator Speed", speed);
         SmartDashboard.putNumber("Elevator Position", position);
@@ -103,12 +86,20 @@ public class Elevator extends Subsystem {
 
     @Override
     public void init() {
-        profile = new TorqueTMP(MAX_VELOCITY, MAX_ACCELERATION);
+        MAX_SPEED = Constants.E_MAX_SPEED.getDouble();
+
+        profile = new TorqueTMP(Constants.E_MAX_VELOCITY.getDouble(),
+                Constants.E_MAX_ACCELERATION.getDouble());
         pv = new TorquePV();
 
         setpoint = feedback.getElevatorPosition();
-
         autoStacking = false;
+
+        pv.setGains(Constants.E_PV_P.getDouble(),
+                Constants.E_PV_V.getDouble(),
+                Constants.E_PV_ffP.getDouble(),
+                Constants.E_PV_ffV.getDouble());
+        pv.setTunedVoltage(Constants.TUNED_VOLTAGE.getDouble());
     }
 
     //singleton

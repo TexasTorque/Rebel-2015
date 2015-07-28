@@ -28,10 +28,6 @@ public class Tail extends Subsystem {
     public void init() {
     }
 
-    @Override
-    public void loadParams() {
-    }
-
     //singleton
     private static Tail instance;
 

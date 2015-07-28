@@ -23,9 +23,6 @@ public abstract class Subsystem {
         input = input_;
     }
 
-    //load parameters (eg PID constants, speeds, timing)
-    public abstract void loadParams();
-
     //put values to dashboard
     public abstract void pushToDashboard();
 
@@ -34,7 +31,7 @@ public abstract class Subsystem {
 
     //run the subsystem (every 1/100 of a second)
     public abstract void run();
-    
+
     //send values to robotoutput
     public abstract void output();
 }

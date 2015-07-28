@@ -28,10 +28,6 @@ public class CanHolder extends Subsystem {
     public void init() {
     }
 
-    @Override
-    public void loadParams() {
-    }
-
     //singleton
     private static CanHolder instance;
 
