@@ -46,10 +46,10 @@ public class HumanInput extends Input {
         }
 
         tailDown = operator.getLeftBumper();
-        canHeld = operator.getAButton();
+        stackStabilized = operator.getAButton();
 
         if (driver.getRightTrigger()) {
-            canHeld = false;
+            stackStabilized = false;
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         }
     }

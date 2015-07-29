@@ -11,13 +11,13 @@ public class CanHolder extends Subsystem {
 
     @Override
     public void run() {
-        holding = input.isCanHeld();
+        holding = input.isStackStabilized();
         output();
     }
 
     @Override
     protected void output() {
-        output.setCanHolder(holding);
+        output.setStabilizer(holding);
     }
 
     @Override

@@ -8,7 +8,7 @@ public abstract class Input {
     protected double leftIntakeSpeed;
     protected double rightIntakeSpeed;
 
-    protected boolean canHeld = false;
+    protected boolean stackStabilized = false;
     protected boolean tailDown = false;
 
     //override values
@@ -42,8 +42,8 @@ public abstract class Input {
         return rightIntakeSpeed;
     }
 
-    public boolean isCanHeld() {
-        return canHeld;
+    public boolean isStackStabilized() {
+        return stackStabilized;
     }
 
     public boolean isTailDown() {

@@ -20,7 +20,7 @@ public class Output {
     private TorqueMotor leftElevatorMotor;
     private TorqueMotor rightElevatorMotor;
 
-    private DoubleSolenoid canHolderSolenoid;
+    private DoubleSolenoid stabilizerSolenoid;
 
     private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
@@ -34,8 +34,8 @@ public class Output {
         leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), true);
         rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
 
-        canHolderSolenoid = new DoubleSolenoid(Ports.CANHOLDER_SOLENOID_PORT_A, Ports.CANHOLDER_SOLENOID_PORT_B);
-        
+        stabilizerSolenoid = new DoubleSolenoid(Ports.STABILIZER_SOLENOID_PORT_A, Ports.STABILIZER_SOLENOID_PORT_B);
+
         outputEnabled = true;
     }
 
@@ -73,12 +73,12 @@ public class Output {
         rightElevatorMotor.set(speed);
     }
 
-    public void setCanHolder(boolean on) {
+    public void setStabilizer(boolean on) {
         if (!outputEnabled) {
-            canHolderSolenoid.set(DoubleSolenoid.Value.kForward);
+            stabilizerSolenoid.set(DoubleSolenoid.Value.kForward);
             return;
         }
-        canHolderSolenoid.set(on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+        stabilizerSolenoid.set(on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
 
     //singleton

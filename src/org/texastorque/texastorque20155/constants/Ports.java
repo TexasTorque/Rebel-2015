@@ -26,8 +26,6 @@ public class Ports {
     public static int ELEVATOR_ENCODER_B = 3;
 
     //solenoids
-    public static int CANHOLDER_SOLENOID_PORT_A = 2;
-    public static int CANHOLDER_SOLENOID_PORT_B = 3;
-    public static int TAIL_SOLENOID_PORT = -1;
-
+    public static int STABILIZER_SOLENOID_PORT_A = 2;
+    public static int STABILIZER_SOLENOID_PORT_B = 3;
 }
