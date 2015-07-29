@@ -41,6 +41,7 @@ public class Constants extends Parameters {
 
     public static final Constant E_UP_POSITION = new Constant("E_UP_POSITION", 0.0);
     public static final Constant E_DOWN_POSITION = new Constant("E_DOWN_POSITION", 0.0);
+    public static final Constant E_SIX_POSITION = new Constant("E_SIX_POSITION", 0.0);
 
     static {
         load();

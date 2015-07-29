@@ -49,6 +49,8 @@ public class HumanInput extends Input {
             elevatorSetpoint = Constants.E_UP_POSITION.getDouble();
         } else if (operator.getBButton()) {
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
+        } else if (operator.getXButton()) {
+            elevatorSetpoint = Constants.E_SIX_POSITION.getDouble();
         }
 
         tailDown = operator.getLeftBumper();
@@ -57,6 +59,7 @@ public class HumanInput extends Input {
 
         if (driver.getRightTrigger()) {
             stackStabilized = false;
+            stabilizerToggle.set(false);
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         }
     }
