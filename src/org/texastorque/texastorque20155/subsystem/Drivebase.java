@@ -133,6 +133,8 @@ public class Drivebase extends Subsystem {
                 Constants.D_RIGHT_PV_ffP.getDouble(),
                 Constants.D_RIGHT_PV_ffV.getDouble());
         rightPV.setTunedVoltage(Constants.TUNED_VOLTAGE.getDouble());
+
+        prevTime = Timer.getFPGATimestamp();
     }
 
     //singleton

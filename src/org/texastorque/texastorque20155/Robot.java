@@ -119,7 +119,6 @@ public class Robot extends TorqueIterative {
 
     private void updateDashboard() {
         subsystems.forEach((subsystem) -> subsystem.pushToDashboard());
-        SmartDashboard.putBoolean("IsAutonomous", DriverStation.getInstance().isAutonomous());
         SmartDashboard.putNumber("NumCycles", numCycles++);
     }
 }

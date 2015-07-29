@@ -97,6 +97,8 @@ public class Elevator extends Subsystem {
                 Constants.E_PV_ffP.getDouble(),
                 Constants.E_PV_ffV.getDouble());
         pv.setTunedVoltage(Constants.TUNED_VOLTAGE.getDouble());
+
+        prevTime = Timer.getFPGATimestamp();
     }
 
     //singleton

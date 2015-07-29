@@ -32,7 +32,7 @@ public class AutoManager {
     public AutoMode getAutoMode() {
         return mode;
     }
-    
+
     public void reset() {
         mode = null;
     }
