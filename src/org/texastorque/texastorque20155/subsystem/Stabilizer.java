@@ -2,27 +2,27 @@ package org.texastorque.texastorque20155.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class CanHolder extends Subsystem {
+public class Stabilizer extends Subsystem {
 
-    private boolean holding;
+    private boolean stabilizing;
 
-    private CanHolder() {
+    private Stabilizer() {
     }
 
     @Override
     public void run() {
-        holding = input.isStackStabilized();
+        stabilizing = input.isStackStabilized();
         output();
     }
 
     @Override
     protected void output() {
-        output.setStabilizer(holding);
+        output.setStabilizer(stabilizing);
     }
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putBoolean("Can Holder", holding);
+        SmartDashboard.putBoolean("Can Holder", stabilizing);
     }
 
     @Override
@@ -30,11 +30,11 @@ public class CanHolder extends Subsystem {
     }
 
     //singleton
-    private static CanHolder instance;
+    private static Stabilizer instance;
 
-    public static CanHolder getInstance() {
+    public static Stabilizer getInstance() {
         if (instance == null) {
-            instance = new CanHolder();
+            instance = new Stabilizer();
         }
         return instance;
     }
