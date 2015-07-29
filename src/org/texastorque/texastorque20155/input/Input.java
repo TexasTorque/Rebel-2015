@@ -10,7 +10,6 @@ public abstract class Input {
 
     protected boolean canHeld = false;
     protected boolean tailDown = false;
-    protected boolean autoStack = false;
 
     //override values
     protected boolean override = false;

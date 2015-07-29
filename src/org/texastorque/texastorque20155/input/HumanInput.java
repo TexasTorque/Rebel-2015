@@ -1,6 +1,5 @@
 package org.texastorque.texastorque20155.input;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 
@@ -26,8 +25,8 @@ public class HumanInput extends Input {
     @Override
     public void update() {
         //driver
-        leftDriveSpeed = -driver.getLeftYAxis() * 0.6 + driver.getRightXAxis() * 0.6;
-        rightDriveSpeed = -driver.getLeftYAxis() * 0.6 - driver.getRightXAxis() * 0.6;
+        leftDriveSpeed = -driver.getLeftYAxis() * Y_DRIVE_MULTIPLIER + driver.getRightXAxis() * X_DRIVE_MULTIPLIER;
+        rightDriveSpeed = -driver.getLeftYAxis() * Y_DRIVE_MULTIPLIER - driver.getRightXAxis() * X_DRIVE_MULTIPLIER;
 
         //operator
         if (operator.getLeftCenterButton()) {
@@ -48,11 +47,9 @@ public class HumanInput extends Input {
 
         tailDown = operator.getLeftBumper();
         canHeld = operator.getAButton();
-        autoStack = operator.getXButton();
 
         if (driver.getRightTrigger()) {
             canHeld = false;
-            autoStack = false;
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         }
     }
