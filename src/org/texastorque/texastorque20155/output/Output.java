@@ -1,7 +1,6 @@
 package org.texastorque.texastorque20155.output;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Relay.Value;
 import org.texastorque.texastorque20155.constants.Ports;
 import edu.wpi.first.wpilibj.VictorSP;
 import org.texastorque.torquelib.component.TorqueMotor;
@@ -22,7 +21,6 @@ public class Output {
     private TorqueMotor rightElevatorMotor;
 
     private DoubleSolenoid canHolderSolenoid;
-//    private Solenoid tailSolenoid;
 
     private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
@@ -37,7 +35,7 @@ public class Output {
         rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
 
         canHolderSolenoid = new DoubleSolenoid(Ports.CANHOLDER_SOLENOID_PORT_A, Ports.CANHOLDER_SOLENOID_PORT_B);
-//        tailSolenoid = new Solenoid(Ports.TAIL_SOLENOID_PORT);
+        
         outputEnabled = true;
     }
 
@@ -81,14 +79,6 @@ public class Output {
             return;
         }
         canHolderSolenoid.set(on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
-    }
-
-    public void setTail(boolean down) {
-//        if (!outputEnabled) {
-//            tailSolenoid.set(false);
-//            return;
-//        }
-//        tailSolenoid.set(down);
     }
 
     //singleton
