@@ -1,9 +1,9 @@
 package org.texastorque.texastorque20155.auto.modes;
 
-public class DriveAuto extends AutoMode {
+public class TestAuto extends AutoMode {
 
     @Override
     public void run() {
-        drivebaseSetpoint = 6.0 * 12.0;
+        runCommand(new DriveCommand(7.5));
     }
 }

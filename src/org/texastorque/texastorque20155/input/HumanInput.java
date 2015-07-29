@@ -2,6 +2,7 @@ package org.texastorque.texastorque20155.input;
 
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
+import org.texastorque.torquelib.util.TorqueToggle;
 
 public class HumanInput extends Input {
 
@@ -11,9 +12,14 @@ public class HumanInput extends Input {
     private GenericController driver;
     private GenericController operator;
 
+    private TorqueToggle stabilizerToggle;
+
     public HumanInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.12);
+
+        stabilizerToggle = new TorqueToggle();
+        stabilizerToggle.set(false);
     }
 
     @Override
@@ -46,7 +52,8 @@ public class HumanInput extends Input {
         }
 
         tailDown = operator.getLeftBumper();
-        stackStabilized = operator.getAButton();
+        stabilizerToggle.calc(operator.getAButton());
+        stackStabilized = stabilizerToggle.get();
 
         if (driver.getRightTrigger()) {
             stackStabilized = false;

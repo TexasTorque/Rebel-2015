@@ -2,12 +2,15 @@ package org.texastorque.texastorque20155.auto.modes;
 
 import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque20155.auto.AutoCommand;
-import org.texastorque.texastorque20155.constants.Constants;
+import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.texastorque20155.input.Input;
 
 public abstract class AutoMode extends Input implements Runnable {
 
+    protected final Feedback feedback;
+
     public AutoMode() {
+        feedback = Feedback.getInstance();
     }
 
     @Override
@@ -34,14 +37,18 @@ public abstract class AutoMode extends Input implements Runnable {
         }
     }
 
-    public final class StackCommand extends AutoCommand {
+    public final class DriveCommand extends AutoCommand {
+
+        private double distance;
+
+        public DriveCommand(double distance_) {
+            distance = distance_;
+        }
 
         @Override
         public void run() {
-            elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
-            while (!close(elevatorSetpoint, Constants.E_DOWN_POSITION.getDouble())) {
-            }
-            elevatorSetpoint = Constants.E_UP_POSITION.getDouble();
+            drivebaseSetpoint = distance;
+            while (Math.abs(((feedback.getLeftDrivePosition() + feedback.getRightDrivePosition()) / 2.0) - distance) > 0.05);
         }
     }
 }

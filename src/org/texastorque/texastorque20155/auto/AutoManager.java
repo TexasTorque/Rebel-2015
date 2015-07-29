@@ -3,12 +3,12 @@ package org.texastorque.texastorque20155.auto;
 import org.texastorque.texastorque20155.auto.modes.AutoMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.auto.modes.DoNothingAuto;
-import org.texastorque.texastorque20155.auto.modes.DriveAuto;
+import org.texastorque.texastorque20155.auto.modes.TestAuto;
 import org.texastorque.texastorque20155.auto.modes.ThreeToteAuto;
 
 public class AutoManager {
 
-    private final int DRIVE_AUTO = 1;
+    private final int TEST_AUTO = 1;
     private final int THREE_TOTE_AUTO = 3;
 
     private AutoMode mode;
@@ -22,9 +22,9 @@ public class AutoManager {
         int modeChoice = (int) SmartDashboard.getNumber("Autonomous Mode", 0);
 
         switch (modeChoice) {
-            case DRIVE_AUTO:
-                SmartDashboard.putString("Running Auto Mode", "Drive Auto");
-                return mode = new DriveAuto();
+            case TEST_AUTO:
+                SmartDashboard.putString("Running Auto Mode", "Test Auto");
+                return mode = new TestAuto();
             case THREE_TOTE_AUTO:
                 SmartDashboard.putString("Running Auto Mode", "Three Tote Auto");
                 return mode = new ThreeToteAuto();
