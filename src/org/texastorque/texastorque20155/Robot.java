@@ -20,9 +20,9 @@ public class Robot extends TorqueIterative {
 
     private AutoManager autoManager;
     private Thread autoThread;
+    private Input currentInput;
 
     private Feedback feedback;
-    private Input currentInput;
 
     private ArrayList<Subsystem> subsystems;
 
@@ -76,7 +76,9 @@ public class Robot extends TorqueIterative {
         }
 
         Parameters.load();
-        currentInput = new HumanInput();
+        if (currentInput == null) {
+            currentInput = new HumanInput();
+        }
         currentInput.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.setInput(currentInput);

@@ -90,8 +90,7 @@ public class Elevator extends Subsystem {
                 Constants.E_MAX_ACCELERATION.getDouble());
         pv = new TorquePV();
 
-        feedback.resetDriveEncoders();
-        setpoint = Constants.E_DOWN_POSITION.getDouble();
+        setpoint = feedback.getElevatorPosition();
 
         pv.setGains(Constants.E_PV_P.getDouble(),
                 Constants.E_PV_V.getDouble(),
