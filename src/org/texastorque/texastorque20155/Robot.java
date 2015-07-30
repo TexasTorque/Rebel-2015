@@ -41,6 +41,11 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void autonomousInit() {
+        if (autoThread != null) {
+            autoThread.interrupt();
+            autoThread = null;
+        }
+
         Parameters.load();
         autoManager.reset();
         currentInput = autoManager.createAutoMode();
@@ -73,12 +78,12 @@ public class Robot extends TorqueIterative {
     public void teleopInit() {
         if (autoThread != null) {
             autoThread.interrupt();
+            autoThread = null;
+            autoManager.reset();
         }
 
         Parameters.load();
-        if (currentInput == null) {
-            currentInput = new HumanInput();
-        }
+        currentInput = new HumanInput();
         currentInput.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.setInput(currentInput);

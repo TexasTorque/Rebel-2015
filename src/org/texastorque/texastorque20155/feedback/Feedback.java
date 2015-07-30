@@ -38,7 +38,7 @@ public class Feedback {
         leftDriveEncoder.calc();
         rightDriveEncoder.calc();
 
-        elevatorPosition = elevatorEncoder.get() * ELEVATOR_CONVERSION;
+        elevatorPosition = 18.771 + elevatorEncoder.get() * ELEVATOR_CONVERSION;
         elevatorVelocity = elevatorEncoder.getRate() * ELEVATOR_CONVERSION;
         elevatorAcceleration = elevatorEncoder.getAcceleration() * ELEVATOR_CONVERSION;
 

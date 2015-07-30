@@ -6,4 +6,6 @@ public abstract class AutoCommand {
     }
 
     public abstract void run();
+    
+    public abstract boolean isDone();
 }

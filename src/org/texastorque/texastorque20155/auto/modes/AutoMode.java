@@ -25,6 +25,7 @@ public abstract class AutoMode extends Input implements Runnable {
 
     protected final void runCommand(AutoCommand command) {
         command.run();
+        while (!command.isDone());
     }
 
     protected final void pause(double seconds) {
@@ -37,6 +38,26 @@ public abstract class AutoMode extends Input implements Runnable {
         }
     }
 
+    public final class ElevatorCommand extends AutoCommand {
+
+        private double height;
+
+        public ElevatorCommand(double height_) {
+            height = height_;
+        }
+
+        @Override
+        public boolean isDone() {
+            return Math.abs(feedback.getElevatorPosition() - height) < 0.12;
+        }
+
+        @Override
+        public void run() {
+            override = false;
+            elevatorSetpoint = height;
+        }
+    }
+
     public final class DriveCommand extends AutoCommand {
 
         private double distance;
@@ -46,9 +67,14 @@ public abstract class AutoMode extends Input implements Runnable {
         }
 
         @Override
+        public boolean isDone() {
+            return Math.abs(((feedback.getLeftDrivePosition() + feedback.getRightDrivePosition()) / 2.0) - distance) < 1.0;
+        }
+
+        @Override
         public void run() {
+            override = false;
             drivebaseSetpoint = distance;
-            while (Math.abs(((feedback.getLeftDrivePosition() + feedback.getRightDrivePosition()) / 2.0) - distance) > 0.05);
         }
     }
 }

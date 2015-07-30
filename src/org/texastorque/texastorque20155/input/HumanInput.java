@@ -31,8 +31,8 @@ public class HumanInput extends Input {
     @Override
     public void update() {
         //driver
-        leftDriveSpeed = -driver.getLeftYAxis() * Y_DRIVE_MULTIPLIER + driver.getRightXAxis() * X_DRIVE_MULTIPLIER;
-        rightDriveSpeed = -driver.getLeftYAxis() * Y_DRIVE_MULTIPLIER - driver.getRightXAxis() * X_DRIVE_MULTIPLIER;
+        leftDriveSpeed = -driver.getLeftYAxis() * 1.0 + driver.getRightXAxis() * 1.0;
+        rightDriveSpeed = -driver.getLeftYAxis() * 1.0 - driver.getRightXAxis() * 1.0;
 
         //operator
         if (operator.getLeftCenterButton()) {
