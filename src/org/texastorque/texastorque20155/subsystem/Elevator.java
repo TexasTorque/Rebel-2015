@@ -31,6 +31,7 @@ public class Elevator extends Subsystem {
     private double prevTime;
 
     private Elevator() {
+        pv = new TorquePV();
     }
 
     @Override
@@ -88,9 +89,11 @@ public class Elevator extends Subsystem {
 
         profile = new TorqueTMP(Constants.E_MAX_VELOCITY.getDouble(),
                 Constants.E_MAX_ACCELERATION.getDouble());
-        pv = new TorquePV();
+        position = feedback.getElevatorPosition();
+        velocity = feedback.getElevatorVelocity();
+        profile.generateTrapezoid(setpoint, position, speed);
 
-        setpoint = feedback.getElevatorPosition();
+        //setpoint = feedback.getElevatorPosition();
 
         pv.setGains(Constants.E_PV_P.getDouble(),
                 Constants.E_PV_V.getDouble(),

@@ -10,6 +10,7 @@ import org.texastorque.texastorque20155.subsystem.Stabilizer;
 import org.texastorque.texastorque20155.subsystem.Drivebase;
 import org.texastorque.texastorque20155.subsystem.Elevator;
 import org.texastorque.texastorque20155.subsystem.Intake;
+import org.texastorque.texastorque20155.subsystem.Not118;
 import org.texastorque.texastorque20155.subsystem.Subsystem;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
@@ -21,6 +22,8 @@ public class Robot extends TorqueIterative {
     private AutoManager autoManager;
     private Thread autoThread;
     private Input currentInput;
+    
+    private HumanInput humanInput;
 
     private Feedback feedback;
 
@@ -37,6 +40,9 @@ public class Robot extends TorqueIterative {
         subsystems.add(Intake.getInstance());
         subsystems.add(Elevator.getInstance());
         subsystems.add(Stabilizer.getInstance());
+        subsystems.add(new Not118());
+        
+        humanInput = new HumanInput();
     }
 
     @Override
@@ -83,7 +89,7 @@ public class Robot extends TorqueIterative {
         }
 
         Parameters.load();
-        currentInput = new HumanInput();
+        currentInput = humanInput;
         currentInput.loadParams();
         subsystems.forEach((subsystem) -> {
             subsystem.setInput(currentInput);

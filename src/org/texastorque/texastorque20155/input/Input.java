@@ -2,7 +2,7 @@ package org.texastorque.texastorque20155.input;
 
 public abstract class Input {
 
-    protected double elevatorSetpoint;
+    protected double elevatorSetpoint = 15;
     protected double drivebaseSetpoint;
 
     protected double leftIntakeSpeed;

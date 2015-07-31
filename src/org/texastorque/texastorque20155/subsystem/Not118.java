@@ -10,17 +10,15 @@ package org.texastorque.texastorque20155.subsystem;
  * @author Texas Torque
  */
 public class Not118 extends Subsystem {
-
+//this is not 118 at all -Crispy
     private boolean down;
     
     @Override
     public void pushToDashboard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
