@@ -2,6 +2,7 @@ package org.texastorque.texastorque20155.auto;
 
 import org.texastorque.texastorque20155.auto.modes.AutoMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.texastorque20155.auto.modes.CanGrabAuto;
 import org.texastorque.texastorque20155.auto.modes.DoNothingAuto;
 import org.texastorque.texastorque20155.auto.modes.DriveAuto;
 import org.texastorque.texastorque20155.auto.modes.TestAuto;
@@ -11,6 +12,7 @@ public class AutoManager {
 
     private final int DRIVE_AUTO = 1;
     private final int THREE_TOTE_AUTO = 3;
+    private final int CAN_AUTO = 4;
     private final int TEST_AUTO = 100;
 
     private AutoMode mode;
@@ -33,6 +35,9 @@ public class AutoManager {
             case TEST_AUTO:
                 SmartDashboard.putString("Running Auto Mode", "Test Auto");
                 return mode = new TestAuto();
+            case CAN_AUTO:
+                SmartDashboard.putString("Running Auto Mode", "Can Auto");
+                return mode = new CanGrabAuto();
             default:
                 SmartDashboard.putString("Running Auto Mode", "Do Nothing Auto");
                 return mode = new DoNothingAuto();

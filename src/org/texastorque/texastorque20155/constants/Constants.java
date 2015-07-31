@@ -10,6 +10,8 @@ public class Constants extends Parameters {
     public static final Constant XBOX_Y_DRIVE_MULTIPLIER = new Constant("XBOX_Y_DRIVE_MULTIPLIER", 0.6);
 
     //drivebase
+    public static final Constant AUTO_CAN_GRAB_INCHES = new Constant("D_AUTO_CAN_GRAB_INCHES", 0.0);
+    
     public static final Constant D_MAX_SPEED = new Constant("D_MAX_SPEED", 1.0);
 
     public static final Constant D_MAX_VELOCITY = new Constant("D_MAX_VELOCITY", 10.0);
