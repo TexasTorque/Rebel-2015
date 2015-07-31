@@ -13,6 +13,7 @@ public class HumanInput extends Input {
     private GenericController operator;
 
     private TorqueToggle stabilizerToggle;
+    private TorqueToggle canRakeToggle;
 
     public HumanInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
@@ -20,6 +21,8 @@ public class HumanInput extends Input {
 
         stabilizerToggle = new TorqueToggle();
         stabilizerToggle.set(false);
+        
+        canRakeToggle = new TorqueToggle();
     }
 
     @Override
@@ -62,5 +65,8 @@ public class HumanInput extends Input {
             stabilizerToggle.set(false);
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         }
+        
+        canRakeToggle.calc(operator.getRightBumper());
+        tailDown = canRakeToggle.get();
     }
 }
