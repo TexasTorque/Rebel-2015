@@ -13,7 +13,7 @@ public class Constants extends Parameters {
     public static final Constant AUTO_CAN_GRAB_INCHES = new Constant("D_AUTO_CAN_GRAB_INCHES", 0.0);
     
     public static final Constant D_MAX_SPEED = new Constant("D_MAX_SPEED", 1.0);
-
+    
     public static final Constant D_MAX_VELOCITY = new Constant("D_MAX_VELOCITY", 10.0);
     public static final Constant D_MAX_ACCELERATION = new Constant("D_MAX_ACCELERATION", 5.0);
 
@@ -44,7 +44,7 @@ public class Constants extends Parameters {
     public static final Constant E_UP_POSITION = new Constant("E_UP_POSITION", 0.0);
     public static final Constant E_DOWN_POSITION = new Constant("E_DOWN_POSITION", 0.0);
     public static final Constant E_SIX_POSITION = new Constant("E_SIX_POSITION", 0.0);
-
+    
     static {
         load();
     }
