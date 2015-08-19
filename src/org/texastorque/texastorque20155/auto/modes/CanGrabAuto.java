@@ -8,6 +8,8 @@ public class CanGrabAuto extends AutoMode {
     public void run() {
         tailDown = true;
         
+        pause(1.0);
+        
         runCommand(new DriveCommand(-1 * Constants.AUTO_CAN_GRAB_INCHES.getDouble()));
         
         pause(1.0);

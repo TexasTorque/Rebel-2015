@@ -94,21 +94,21 @@ public class Drivebase extends Subsystem {
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putNumber("Left Drive Speed", leftSpeed);
-        SmartDashboard.putNumber("Right Drive Speed", rightSpeed);
+        SmartDashboard.putNumber("LeftDriveSpeed", leftSpeed);
+        SmartDashboard.putNumber("RightDriveSpeed", rightSpeed);
 
-        SmartDashboard.putNumber("Left Drive Position", leftPosition);
-        SmartDashboard.putNumber("Right Drive Position", rightPosition);
+        SmartDashboard.putNumber("LeftDrivePosition", leftPosition);
+        SmartDashboard.putNumber("RightDrivePosition", rightPosition);
 
-        SmartDashboard.putNumber("Left Drive Velocity", leftVelocity);
-        SmartDashboard.putNumber("Right Drive Velocity", rightVelocity);
+        SmartDashboard.putNumber("LeftDriveVelocity", leftVelocity);
+        SmartDashboard.putNumber("RightDriveVelocity", rightVelocity);
 
-        SmartDashboard.putNumber("Left Drive Acceleration", leftAcceleration);
-        SmartDashboard.putNumber("Right Drive Acceleration", rightAcceleration);
+        SmartDashboard.putNumber("LeftDriveAcceleration", leftAcceleration);
+        SmartDashboard.putNumber("RightDriveAcceleration", rightAcceleration);
 
-        SmartDashboard.putNumber("Drive Target Position", targetPosition);
-        SmartDashboard.putNumber("Drive Target Velocity", targetVelocity);
-        SmartDashboard.putNumber("Drive Target Acceleration", targetAcceleration);
+        SmartDashboard.putNumber("DriveTargetPosition", targetPosition);
+        SmartDashboard.putNumber("DriveTargetVelocity", targetVelocity);
+        SmartDashboard.putNumber("DriveTargetAcceleration", targetAcceleration);
     }
 
     @Override

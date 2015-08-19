@@ -18,28 +18,28 @@ public class AutoManager {
     private AutoMode mode;
 
     private AutoManager() {
-        SmartDashboard.putNumber("Autonomous Mode", 0);
-        SmartDashboard.putString("Running Auto Mode", "N/A");
+        SmartDashboard.putNumber("AutonomousMode", 0);
+        SmartDashboard.putString("RunningAutoMode", "N/A");
     }
 
     public AutoMode createAutoMode() {
-        int modeChoice = (int) SmartDashboard.getNumber("Autonomous Mode", 0);
+        int modeChoice = (int) SmartDashboard.getNumber("AutonomousMode", 0);
 
         switch (modeChoice) {
             case DRIVE_AUTO:
-                SmartDashboard.putString("Running Auto Mode", "Drive Auto");
+                SmartDashboard.putString("RunningAutoMode", "DriveAuto");
                 return mode = new DriveAuto();
             case THREE_TOTE_AUTO:
-                SmartDashboard.putString("Running Auto Mode", "Three Tote Auto");
+                SmartDashboard.putString("RunningAutoMode", "ThreeToteAuto");
                 return mode = new ThreeToteAuto();
             case TEST_AUTO:
-                SmartDashboard.putString("Running Auto Mode", "Test Auto");
+                SmartDashboard.putString("RunningAutoMode", "TestAuto");
                 return mode = new TestAuto();
             case CAN_AUTO:
-                SmartDashboard.putString("Running Auto Mode", "Can Auto");
+                SmartDashboard.putString("RunningAutoMode", "CanAuto");
                 return mode = new CanGrabAuto();
             default:
-                SmartDashboard.putString("Running Auto Mode", "Do Nothing Auto");
+                SmartDashboard.putString("RunningAutoMode", "DoNothingAuto");
                 return mode = new DoNothingAuto();
         }
     }
@@ -49,7 +49,7 @@ public class AutoManager {
     }
 
     public void reset() {
-        SmartDashboard.putString("Running Auto Mode", "N/A");
+        SmartDashboard.putString("RunningAutoMode", "N/A");
         mode = null;
     }
 

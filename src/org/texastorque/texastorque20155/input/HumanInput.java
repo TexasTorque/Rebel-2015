@@ -1,6 +1,7 @@
 package org.texastorque.texastorque20155.input;
 
 import org.texastorque.texastorque20155.constants.Constants;
+import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
 
@@ -14,6 +15,8 @@ public class HumanInput extends Input {
 
     private TorqueToggle stabilizerToggle;
     private TorqueToggle canRakeToggle;
+    
+    private boolean wantStabilizer;
 
     public HumanInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
@@ -34,8 +37,8 @@ public class HumanInput extends Input {
     @Override
     public void update() {
         //driver
-        leftDriveSpeed = -driver.getLeftYAxis() * 1.0 + driver.getRightXAxis() * 1.0;
-        rightDriveSpeed = -driver.getLeftYAxis() * 1.0 - driver.getRightXAxis() * 1.0;
+        leftDriveSpeed = -driver.getLeftYAxis() * 0.7 + driver.getRightXAxis() * 0.7;
+        rightDriveSpeed = -driver.getLeftYAxis() * 0.6 - driver.getRightXAxis() * 0.6;
 
         //operator
         if (operator.getLeftCenterButton()) {
@@ -54,15 +57,25 @@ public class HumanInput extends Input {
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         } else if (operator.getXButton()) {
             elevatorSetpoint = Constants.E_SIX_POSITION.getDouble();
+        } else if (operator.getAButton()) {
+            elevatorSetpoint = Constants.E_UP_POSITION.getDouble();
+            wantStabilizer = true;
         }
 
         tailDown = operator.getLeftBumper();
-        stabilizerToggle.calc(operator.getAButton());
-        stackStabilized = stabilizerToggle.get();
+        
+        if (wantStabilizer && Feedback.getInstance().getElevatorPosition() >= 1.0) {
+            stackStabilized = true;
+        }
+        if (operator.getLeftBumper()) {
+            wantStabilizer = false;
+            stackStabilized = false;
+        }
 
         if (driver.getRightTrigger()) {
             stackStabilized = false;
-            stabilizerToggle.set(false);
+            stackStabilized = false;
+            wantStabilizer = false;
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         }
         

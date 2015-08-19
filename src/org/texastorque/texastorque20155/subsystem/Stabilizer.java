@@ -22,7 +22,7 @@ public class Stabilizer extends Subsystem {
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putBoolean("Can Holder", stabilizing);
+        SmartDashboard.putBoolean("CanHolder", stabilizing);
     }
 
     @Override

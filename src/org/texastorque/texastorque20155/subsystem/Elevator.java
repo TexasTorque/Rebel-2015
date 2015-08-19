@@ -73,14 +73,14 @@ public class Elevator extends Subsystem {
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putNumber("Elevator Speed", speed);
-        SmartDashboard.putNumber("Elevator Position", position);
-        SmartDashboard.putNumber("Elevator Velocity", velocity);
-        SmartDashboard.putNumber("Elevator Acceleration", accelertion);
+        SmartDashboard.putNumber("ElevatorSpeed", speed);
+        SmartDashboard.putNumber("ElevatorPosition", position);
+        SmartDashboard.putNumber("ElevatorVelocity", velocity);
+        SmartDashboard.putNumber("ElevatorAcceleration", accelertion);
 
-        SmartDashboard.putNumber("Elevator Target Position", targetPosition);
-        SmartDashboard.putNumber("Elevator Target Velocity", targetVelocity);
-        SmartDashboard.putNumber("Elevator Target Acceleration", targetAcceleration);
+        SmartDashboard.putNumber("ElevatorTargetPosition", targetPosition);
+        SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
+        SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
     }
 
     @Override
@@ -93,12 +93,10 @@ public class Elevator extends Subsystem {
         velocity = feedback.getElevatorVelocity();
         profile.generateTrapezoid(setpoint, position, speed);
 
-        //setpoint = feedback.getElevatorPosition();
-
         pv.setGains(Constants.E_PV_P.getDouble(),
                 Constants.E_PV_V.getDouble(),
-                Constants.E_PV_ffP.getDouble(),
-                Constants.E_PV_ffV.getDouble());
+                Constants.E_PV_ffV.getDouble(),
+                Constants.E_PV_ffA.getDouble());
         pv.setTunedVoltage(Constants.TUNED_VOLTAGE.getDouble());
 
         prevTime = Timer.getFPGATimestamp();

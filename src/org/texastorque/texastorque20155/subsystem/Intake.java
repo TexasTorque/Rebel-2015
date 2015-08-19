@@ -30,8 +30,8 @@ public class Intake extends Subsystem {
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putNumber("Intake Left Speed", leftSpeed);
-        SmartDashboard.putNumber("Intake Right Speed", rightSpeed);
+        SmartDashboard.putNumber("IntakeLeftSpeed", leftSpeed);
+        SmartDashboard.putNumber("IntakeRightSpeed", rightSpeed);
     }
 
     @Override
