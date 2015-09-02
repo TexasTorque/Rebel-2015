@@ -7,14 +7,12 @@ import org.texastorque.torquelib.util.TorqueToggle;
 
 public class HumanInput extends Input {
 
-    private double X_DRIVE_MULTIPLIER;
-    private double Y_DRIVE_MULTIPLIER;
-
     private GenericController driver;
     private GenericController operator;
 
     private TorqueToggle stabilizerToggle;
     private TorqueToggle canRakeToggle;
+    private TorqueToggle autoStackToggle;
     
     private boolean wantStabilizer;
 
@@ -23,15 +21,12 @@ public class HumanInput extends Input {
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.12);
 
         stabilizerToggle = new TorqueToggle();
-        stabilizerToggle.set(false);
-        
         canRakeToggle = new TorqueToggle();
+        autoStackToggle = new TorqueToggle();
     }
 
     @Override
     public void loadParams() {
-        X_DRIVE_MULTIPLIER = Constants.XBOX_X_DRIVE_MULTIPLIER.getDouble();
-        Y_DRIVE_MULTIPLIER = Constants.XBOX_Y_DRIVE_MULTIPLIER.getDouble();
     }
 
     @Override
@@ -81,5 +76,8 @@ public class HumanInput extends Input {
         
         canRakeToggle.calc(operator.getRightBumper());
         tailDown = canRakeToggle.get();
+        
+        //auto stack toggle calc on ?
+        autoStackMode = autoStackToggle.get();
     }
 }

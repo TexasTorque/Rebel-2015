@@ -10,6 +10,7 @@ public abstract class Input {
 
     protected boolean stackStabilized = false;
     protected boolean tailDown = false;
+    protected boolean autoStackMode = false;
 
     //override values
     protected boolean override = false;
@@ -48,6 +49,10 @@ public abstract class Input {
 
     public boolean isTailDown() {
         return tailDown;
+    }
+    
+    public boolean isAutoStackMode() {
+        return autoStackMode;
     }
 
     public boolean isOverride() {
