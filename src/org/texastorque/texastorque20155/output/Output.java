@@ -82,8 +82,12 @@ public class Output {
         }
         stabilizerSolenoid.set(on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
-    
+
     public void setCanRake(boolean down) {
+        if (!outputEnabled) {
+            canRakeSolenoid.set(DoubleSolenoid.Value.kForward);
+            return;
+        }
         canRakeSolenoid.set((down) ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
 
