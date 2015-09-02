@@ -22,7 +22,7 @@ public class Robot extends TorqueIterative {
     private AutoManager autoManager;
     private Thread autoThread;
     private Input currentInput;
-    
+
     private HumanInput humanInput;
 
     private Feedback feedback;
@@ -41,7 +41,7 @@ public class Robot extends TorqueIterative {
         subsystems.add(Elevator.getInstance());
         subsystems.add(Stabilizer.getInstance());
         subsystems.add(new Not118());
-        
+
         humanInput = new HumanInput();
     }
 
