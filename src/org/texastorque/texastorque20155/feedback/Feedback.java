@@ -3,6 +3,7 @@ package org.texastorque.texastorque20155.feedback;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import org.texastorque.texastorque20155.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
+import org.texastorque.torquelib.component.TorqueLevelSensor;
 
 public class Feedback {
 
@@ -13,6 +14,10 @@ public class Feedback {
 
     private TorqueEncoder leftDriveEncoder;
     private TorqueEncoder rightDriveEncoder;
+
+    private TorqueLevelSensor topLevelSensor;
+    private TorqueLevelSensor middleLevelSensor;
+    private TorqueLevelSensor bottomLevelSensor;
 
     private double elevatorPosition;
     private double elevatorVelocity;
@@ -26,11 +31,19 @@ public class Feedback {
     private double rightDriveVelocity;
     private double rightDriveAcceleration;
 
+    private boolean topLevelTriggered;
+    private boolean middleLevelTriggered;
+    private boolean bottomLevelTriggered;
+
     private Feedback() {
         elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_A, Ports.ELEVATOR_ENCODER_B, true, EncodingType.k4X);//rebel = true
 
         leftDriveEncoder = new TorqueEncoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B, true, EncodingType.k4X);//rebel = true
         rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B, false, EncodingType.k4X);//rebel = false
+
+        topLevelSensor = new TorqueLevelSensor(Ports.TOP_LEVEL_SENSOR_PORT);
+        middleLevelSensor = new TorqueLevelSensor(Ports.MIDDLE_LEVEL_SENSOR_PORT);
+        bottomLevelSensor = new TorqueLevelSensor(Ports.BOTTOM_LEVEL_SENSOR_PORT);
     }
 
     public void update() {
@@ -49,6 +62,10 @@ public class Feedback {
         rightDrivePosition = rightDriveEncoder.get() * DRIVEBASE_CONVERSION;
         rightDriveVelocity = rightDriveEncoder.getRate() * DRIVEBASE_CONVERSION;
         rightDriveAcceleration = rightDriveEncoder.getAcceleration() * DRIVEBASE_CONVERSION;
+
+        topLevelTriggered = topLevelSensor.get();
+        middleLevelTriggered = middleLevelSensor.get();
+        bottomLevelTriggered = bottomLevelSensor.get();
     }
 
     //getters
@@ -86,6 +103,18 @@ public class Feedback {
 
     public double getRightDriveAcceleration() {
         return rightDriveAcceleration;
+    }
+
+    public boolean isTopLevelTriggered() {
+        return topLevelTriggered;
+    }
+
+    public boolean isMiddleLevelTriggered() {
+        return middleLevelTriggered;
+    }
+
+    public boolean isBottomLevelTriggered() {
+        return bottomLevelTriggered;
     }
 
     public void resetDriveEncoders() {

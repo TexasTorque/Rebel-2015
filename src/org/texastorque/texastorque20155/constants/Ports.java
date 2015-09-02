@@ -28,4 +28,9 @@ public class Ports {
     //solenoids
     public static int STABILIZER_SOLENOID_PORT_A = 2;
     public static int STABILIZER_SOLENOID_PORT_B = 3;
+
+    //sensors
+    public static int TOP_LEVEL_SENSOR_PORT = -1;
+    public static int MIDDLE_LEVEL_SENSOR_PORT = -1;
+    public static int BOTTOM_LEVEL_SENSOR_PORT = -1;
 }
