@@ -50,7 +50,7 @@ public abstract class Input {
     public boolean isTailDown() {
         return tailDown;
     }
-    
+
     public boolean isAutoStackMode() {
         return autoStackMode;
     }

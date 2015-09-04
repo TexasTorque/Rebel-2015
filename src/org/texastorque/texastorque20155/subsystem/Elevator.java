@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePV;
 import org.texastorque.torquelib.controlLoop.TorqueTMP;
+import org.texastorque.torquelib.util.LevelStateManager;
 import org.texastorque.torquelib.util.TorqueMathUtil;
 
 public class Elevator extends Subsystem {
@@ -43,7 +44,15 @@ public class Elevator extends Subsystem {
         if (input.isOverride()) {
             speed = input.getElevatorSpeed();
         } else {
-            setpoint = input.getElevatorSetpoint();
+            if (true) {//input.isAutoStackMode()
+                LevelStateManager.passTopLevel(feedback.isTopLevelTriggered());
+                LevelStateManager.passMiddleLevel(feedback.isMiddleLevelTriggered());
+                LevelStateManager.passBottomLevel(feedback.isBottomLevelTriggered());
+
+                setpoint = LevelStateManager.calc();
+            } else {
+                setpoint = input.getElevatorSetpoint();
+            }
 
             if (setpoint != previousSetpoint) {
                 previousSetpoint = setpoint;

@@ -1,6 +1,7 @@
 package org.texastorque.texastorque20155.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.torquelib.util.LevelStateManager;
 
 public class Stabilizer extends Subsystem {
 
@@ -11,7 +12,11 @@ public class Stabilizer extends Subsystem {
 
     @Override
     public void run() {
-        stabilizing = input.isStackStabilized();
+        if (true) {//input.isAutoStackMode()
+            stabilizing = LevelStateManager.getStabilized();
+        } else {
+            stabilizing = input.isStackStabilized();
+        }
         output();
     }
 

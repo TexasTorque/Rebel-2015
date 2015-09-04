@@ -11,6 +11,6 @@ public class TorqueLevelSensor {
     }
 
     public boolean get() {
-        return button.get();
+        return !button.get();
     }
 }

@@ -40,7 +40,7 @@ public class Robot extends TorqueIterative {
         subsystems.add(Intake.getInstance());
         subsystems.add(Elevator.getInstance());
         subsystems.add(Stabilizer.getInstance());
-        subsystems.add(new Not118());
+        subsystems.add(Not118.getInstance());
 
         humanInput = new HumanInput();
     }
