@@ -10,8 +10,6 @@ public class LevelStateManager {
     private static double setpoint = Constants.E_UP_POSITION.getDouble();
     private static boolean stabilized = false;
 
-    private static boolean prevTop;
-    private static boolean prevMiddle;
     private static boolean prevBottom;
 
     private static boolean top;
@@ -24,12 +22,10 @@ public class LevelStateManager {
     private static double lastCommandTime = 0.0;
 
     public static void passTopLevel(boolean triggered) {
-        prevTop = top;
         top = triggered;
     }
 
     public static void passMiddleLevel(boolean triggered) {
-        prevMiddle = middle;
         middle = triggered;
     }
 
@@ -42,11 +38,9 @@ public class LevelStateManager {
         SmartDashboard.putBoolean("Top Level", top);
         SmartDashboard.putBoolean("Middle Level", middle);
         SmartDashboard.putBoolean("Bottom Level", bottom);
-        SmartDashboard.putBoolean("Prev Top Level", prevTop);
-        SmartDashboard.putBoolean("Prev Middle Level", prevMiddle);
-        SmartDashboard.putBoolean("Prev Bottom Level", prevBottom);
         SmartDashboard.putBoolean("Stack Stabilized", stabilized);
         SmartDashboard.putNumber("Times Triggered", timesTriggered);
+        SmartDashboard.putBoolean("Can in Auto Stack", can);
 
         if (bottom != prevBottom && bottom == true) {
             timesTriggered++;
@@ -76,24 +70,6 @@ public class LevelStateManager {
 
     public static boolean getStabilized() {
         return stabilized;
-    }
-
-    private static boolean allTrue(boolean... values) {
-        for (boolean b : values) {
-            if (!b) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean allFalse(boolean... values) {
-        for (boolean b : values) {
-            if (b) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private static boolean elevatorAtPosition(double value) {
