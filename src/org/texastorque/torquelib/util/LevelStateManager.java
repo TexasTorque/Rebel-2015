@@ -53,6 +53,7 @@ public class LevelStateManager {
         }
         if (top && timesTriggered == 1) {
             can = true;
+            timesTriggered--;
         }
         if (bottom && timesTriggered < 6) {
             if (elevatorAtPosition(Constants.E_DOWN_POSITION.getDouble())) {
