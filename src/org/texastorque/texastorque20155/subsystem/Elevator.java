@@ -44,7 +44,7 @@ public class Elevator extends Subsystem {
         if (input.isOverride()) {
             speed = input.getElevatorSpeed();
         } else {
-            if (true) {//input.isAutoStackMode()
+            if (input.isAutoStackMode()) {
                 LevelStateManager.passTopLevel(feedback.isTopLevelTriggered());
                 LevelStateManager.passMiddleLevel(feedback.isMiddleLevelTriggered());
                 LevelStateManager.passBottomLevel(feedback.isBottomLevelTriggered());

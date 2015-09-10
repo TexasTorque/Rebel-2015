@@ -12,7 +12,7 @@ public class Stabilizer extends Subsystem {
 
     @Override
     public void run() {
-        if (true) {//input.isAutoStackMode()
+        if (input.isAutoStackMode()) {
             stabilizing = LevelStateManager.getStabilized();
         } else {
             stabilizing = input.isStackStabilized();
