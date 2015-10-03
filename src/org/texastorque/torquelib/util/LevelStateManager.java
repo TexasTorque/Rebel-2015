@@ -1,3 +1,4 @@
+
 package org.texastorque.torquelib.util;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -45,7 +46,7 @@ public class LevelStateManager {
         if (bottom != prevBottom && bottom == true) {
             timesTriggered++;
         }
-        if (top && timesTriggered == 1) {
+        if (!can && top && timesTriggered == 1) {//!can ?
             can = true;
             timesTriggered--;
         }
