@@ -16,7 +16,7 @@ public class Elevator extends Subsystem {
 
     private double position;
     private double velocity;
-    private double accelertion;
+    private double acceleration;
 
     //profiling
     private TorqueTMP profile;
@@ -39,7 +39,7 @@ public class Elevator extends Subsystem {
     public void run() {
         position = feedback.getElevatorPosition();
         velocity = feedback.getElevatorVelocity();
-        accelertion = feedback.getElevatorAcceleration();
+        acceleration = feedback.getElevatorAcceleration();
 
         if (input.isOverride()) {
             speed = input.getElevatorSpeed();
@@ -85,7 +85,7 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("ElevatorSpeed", speed);
         SmartDashboard.putNumber("ElevatorPosition", position);
         SmartDashboard.putNumber("ElevatorVelocity", velocity);
-        SmartDashboard.putNumber("ElevatorAcceleration", accelertion);
+        SmartDashboard.putNumber("ElevatorAcceleration", acceleration);
 
         SmartDashboard.putNumber("ElevatorTargetPosition", targetPosition);
         SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);

@@ -8,7 +8,7 @@ import org.texastorque.torquelib.component.TorqueLevelSensor;
 public class Feedback {
 
     private final double ELEVATOR_CONVERSION = 0.0064;//inches
-    private final double DRIVEBASE_CONVERSION = 0.0503;
+    private final double DRIVEBASE_CONVERSION = 0.0503;//.0754 wit 6 inch omnis
 
     private TorqueEncoder elevatorEncoder;
 
