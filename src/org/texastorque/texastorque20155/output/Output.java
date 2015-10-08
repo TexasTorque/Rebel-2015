@@ -26,11 +26,11 @@ public class Output {
     private Output() {
         leftDriveCim = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_CIM_MOTOR_PORT), false);
         leftDriveMini = new TorqueMotor(new VictorSP(Ports.LEFT_DRIVE_MINI_MOTOR_PORT), false);
-        rightDriveCim = new TorqueMotor(new VictorSP(Ports.RIGHT_DRIVE_CIM_MOTOR_PORT), true);
+        rightDriveCim = new TorqueMotor(new VictorSP(Ports.RIGHT_DRIVE_CIM_MOTOR_PORT), false);
         rightDriveMini = new TorqueMotor(new VictorSP(Ports.RIGHT_DRIVE_MINI_MOTOR_PORT), true);
 
-        leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_MOTOR_PORT), false);
-        rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_MOTOR_PORT), true);
+        leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_MOTOR_PORT), true);
+        rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_MOTOR_PORT), false);
 
         leftElevatorMotor = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_MOTOR_PORT), true);
         rightElevatorMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_MOTOR_PORT), false);
@@ -77,7 +77,7 @@ public class Output {
 
     public void setStabilizer(boolean on) {
         if (!outputEnabled) {
-            stabilizerSolenoid.set(DoubleSolenoid.Value.kForward);
+            stabilizerSolenoid.set(DoubleSolenoid.Value.kReverse);
             return;
         }
         stabilizerSolenoid.set(on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
@@ -85,7 +85,7 @@ public class Output {
 
     public void setCanRake(boolean down) {
         if (!outputEnabled) {
-            canRakeSolenoid.set(DoubleSolenoid.Value.kForward);
+            canRakeSolenoid.set(DoubleSolenoid.Value.kReverse);
             return;
         }
         canRakeSolenoid.set((down) ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);

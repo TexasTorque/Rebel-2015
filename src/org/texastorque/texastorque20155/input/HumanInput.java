@@ -1,5 +1,6 @@
 package org.texastorque.texastorque20155.input;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.torquelib.util.GenericController;
@@ -10,7 +11,6 @@ public class HumanInput extends Input {
     private GenericController driver;
     private GenericController operator;
 
-    private TorqueToggle stabilizerToggle;
     private TorqueToggle canRakeToggle;
     private TorqueToggle autoStackToggle;
     
@@ -20,7 +20,6 @@ public class HumanInput extends Input {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.12);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.12);
 
-        stabilizerToggle = new TorqueToggle();
         canRakeToggle = new TorqueToggle();
         autoStackToggle = new TorqueToggle();
     }
@@ -32,8 +31,10 @@ public class HumanInput extends Input {
     @Override
     public void update() {
         //driver
-        leftDriveSpeed = -driver.getLeftYAxis() * Constants.XBOX_Y_DRIVE_MULTIPLIER.getDouble() + driver.getRightXAxis() * Constants.XBOX_X_DRIVE_MULTIPLIER.getDouble();
-        rightDriveSpeed = -driver.getLeftYAxis() * Constants.XBOX_Y_DRIVE_MULTIPLIER.getDouble() - driver.getRightXAxis() * Constants.XBOX_X_DRIVE_MULTIPLIER.getDouble();
+        leftDriveSpeed = -driver.getLeftYAxis() + driver.getRightXAxis();
+        rightDriveSpeed = -driver.getLeftYAxis() - driver.getRightXAxis();
+        SmartDashboard.putNumber("LeftDriveSpeed", leftDriveSpeed);
+        SmartDashboard.putNumber("RightDriveSpeed", rightDriveSpeed);
 
         //operator
         if (operator.getLeftCenterButton()) {
