@@ -1,4 +1,3 @@
-
 package org.texastorque.torquelib.util;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -34,6 +33,15 @@ public class LevelStateManager {
         prevBottom = bottom;
         bottom = triggered;
     }
+    
+    public static void reset() {
+        prevBottom = false;
+        can = false;
+        timesTriggered = 0;
+        stabilized = false;
+        setpoint = Constants.E_UP_POSITION.getDouble();
+        lastCommandTime = 0.0;
+    }
 
     public static double calc() {
         SmartDashboard.putBoolean("Top Level", top);
@@ -60,8 +68,10 @@ public class LevelStateManager {
                 }
             }
         }
-        if (timesTriggered == 3) {
+        if (timesTriggered >= 3) {
             stabilized = true;
+        } else {
+            stabilized = false;
         }
         if (timesTriggered >= 6) {
             setpoint = Constants.E_SIX_POSITION.getDouble();
@@ -74,6 +84,6 @@ public class LevelStateManager {
     }
 
     private static boolean elevatorAtPosition(double value) {
-        return Math.abs(Feedback.getInstance().getElevatorPosition() - value) < 3.0;
+        return Math.abs(Feedback.getInstance().getElevatorPosition() - value) < 2.25;
     }
 }

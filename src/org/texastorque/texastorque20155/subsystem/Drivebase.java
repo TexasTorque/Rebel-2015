@@ -25,6 +25,8 @@ public class Drivebase extends Subsystem {
     private double rightAcceleration;
 
     //profiling
+    private double prevTime;
+
     private TorqueTMP profile;
     private TorquePV leftPV;
     private TorquePV rightPV;
@@ -35,8 +37,6 @@ public class Drivebase extends Subsystem {
 
     private double setpoint;
     private double previousSetpoint;
-
-    private double prevTime;
 
     private Drivebase() {
     }
@@ -67,8 +67,6 @@ public class Drivebase extends Subsystem {
                 double dt = Timer.getFPGATimestamp() - prevTime;
                 prevTime = Timer.getFPGATimestamp();
                 profile.calculateNextSituation(dt);
-
-                profile.putToDashboard();
 
                 targetPosition = profile.getCurrentPosition();
                 targetVelocity = profile.getCurrentVelocity();

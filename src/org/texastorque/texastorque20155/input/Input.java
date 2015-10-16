@@ -4,6 +4,7 @@ public abstract class Input {
 
     protected double elevatorSetpoint = 15;
     protected double drivebaseSetpoint;
+    protected double angularDrivebaseSetpoint;
 
     protected double leftIntakeSpeed;
     protected double rightIntakeSpeed;
@@ -33,6 +34,10 @@ public abstract class Input {
 
     public double getDrivebaseSetpoint() {
         return drivebaseSetpoint;
+    }
+    
+    public double getAngularDrivebaseSetpoint() {
+        return angularDrivebaseSetpoint;
     }
 
     public double getLeftIntakeSpeed() {

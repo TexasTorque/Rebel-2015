@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque20155.constants.Constants;
 import org.texastorque.texastorque20155.feedback.Feedback;
 import org.texastorque.torquelib.util.GenericController;
+import org.texastorque.torquelib.util.LevelStateManager;
 import org.texastorque.torquelib.util.TorqueToggle;
 
 public class HumanInput extends Input {
@@ -33,8 +34,6 @@ public class HumanInput extends Input {
         //driver
         leftDriveSpeed = -driver.getLeftYAxis() + driver.getRightXAxis();
         rightDriveSpeed = -driver.getLeftYAxis() - driver.getRightXAxis();
-        SmartDashboard.putNumber("LeftDriveSpeed", leftDriveSpeed);
-        SmartDashboard.putNumber("RightDriveSpeed", rightDriveSpeed);
 
         //operator
         if (operator.getLeftCenterButton()) {
@@ -77,8 +76,19 @@ public class HumanInput extends Input {
         
         canRakeToggle.calc(operator.getRightBumper());
         tailDown = canRakeToggle.get();
-        
-        //auto stack toggle calc on ?
+     
+        autoStackToggle.calc(operator.getLeftStickClick());
+        if (autoStackMode == false && autoStackToggle.get()) {
+            LevelStateManager.reset();
+        }//check
         autoStackMode = autoStackToggle.get();
+    }
+    
+    public void putToDashboard() {
+        SmartDashboard.putNumber("LeftDriveSpeed", leftDriveSpeed);
+        SmartDashboard.putNumber("RightDriveSpeed", rightDriveSpeed);
+        
+        SmartDashboard.putBoolean("Auto Stack On", autoStackMode);
+        SmartDashboard.putBoolean("Overrides On", override);
     }
 }

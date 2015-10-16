@@ -191,10 +191,4 @@ public class TorqueTMP {
             currentVelocity = -topSpeed;
         }
     }
-
-    public void putToDashboard() {
-        SmartDashboard.putNumber("position", getCurrentPosition());
-        SmartDashboard.putNumber("velocity", getCurrentVelocity());
-        SmartDashboard.putNumber("acceleration", getCurrentAcceleration());
-    }
 }

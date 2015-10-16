@@ -13,6 +13,7 @@ import org.texastorque.texastorque20155.subsystem.Intake;
 import org.texastorque.texastorque20155.subsystem.Not118;
 import org.texastorque.texastorque20155.subsystem.Subsystem;
 import org.texastorque.torquelib.base.TorqueIterative;
+import org.texastorque.torquelib.util.LevelStateManager;
 import org.texastorque.torquelib.util.Parameters;
 
 public class Robot extends TorqueIterative {
@@ -82,6 +83,7 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void teleopInit() {
+        LevelStateManager.reset();
         if (autoThread != null) {
             autoThread.interrupt();
             autoThread = null;
