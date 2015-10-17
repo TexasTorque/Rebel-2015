@@ -14,7 +14,8 @@ public class HumanInput extends Input {
 
     private TorqueToggle canRakeToggle;
     private TorqueToggle autoStackToggle;
-    
+    private TorqueToggle stabilizerOverrideToggle;
+
     private boolean wantStabilizer;
 
     public HumanInput() {
@@ -23,6 +24,7 @@ public class HumanInput extends Input {
 
         canRakeToggle = new TorqueToggle();
         autoStackToggle = new TorqueToggle();
+        stabilizerOverrideToggle = new TorqueToggle();
     }
 
     @Override
@@ -38,6 +40,7 @@ public class HumanInput extends Input {
         //operator
         if (operator.getLeftCenterButton()) {
             override = true;
+            autoStackMode = false;
         } else if (operator.getRightCenterButton()) {
             override = false;
         }
@@ -48,17 +51,18 @@ public class HumanInput extends Input {
         elevatorSpeed = -operator.getRightYAxis();
         if (operator.getYButton()) {
             elevatorSetpoint = Constants.E_UP_POSITION.getDouble();
-        } else if (operator.getBButton()) {
+        } else if (operator.getAButton()) {
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         } else if (operator.getXButton()) {
             elevatorSetpoint = Constants.E_SIX_POSITION.getDouble();
-        } else if (operator.getAButton()) {
-            elevatorSetpoint = Constants.E_UP_POSITION.getDouble();
-            wantStabilizer = true;
         }
+//        else if (operator.getBButton()) {
+//            elevatorSetpoint = Constants.E_UP_POSITION.getDouble();
+//            wantStabilizer = true;
+//        }
 
         tailDown = operator.getLeftBumper();
-        
+
         if (wantStabilizer && Feedback.getInstance().getElevatorPosition() >= 1.0) {
             stackStabilized = true;
         }
@@ -73,21 +77,26 @@ public class HumanInput extends Input {
             wantStabilizer = false;
             elevatorSetpoint = Constants.E_DOWN_POSITION.getDouble();
         }
-        
+        autoStackPlace = operator.getLeftTrigger() || driver.getRightTrigger();
+
         canRakeToggle.calc(operator.getRightBumper());
         tailDown = canRakeToggle.get();
-     
+
         autoStackToggle.calc(operator.getLeftStickClick());
         if (autoStackMode == false && autoStackToggle.get()) {
+            overrideStabilized = LevelStateManager.getStabilized();
             LevelStateManager.reset();
         }//check
         autoStackMode = autoStackToggle.get();
+
+        stabilizerOverrideToggle.calc(operator.getRightStickClick());
+        overrideStabilized = stabilizerOverrideToggle.get();
     }
-    
+
     public void putToDashboard() {
         SmartDashboard.putNumber("LeftDriveSpeed", leftDriveSpeed);
         SmartDashboard.putNumber("RightDriveSpeed", rightDriveSpeed);
-        
+
         SmartDashboard.putBoolean("Auto Stack On", autoStackMode);
         SmartDashboard.putBoolean("Overrides On", override);
     }

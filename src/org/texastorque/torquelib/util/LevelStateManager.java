@@ -9,6 +9,9 @@ public class LevelStateManager {
 
     private static double setpoint = Constants.E_UP_POSITION.getDouble();
     private static boolean stabilized = false;
+    private static boolean skipFlag = false;
+    private static double skipLastTime = 0.0;
+    private static boolean finishFlag = false;
 
     private static boolean prevBottom;
 
@@ -20,6 +23,8 @@ public class LevelStateManager {
     private static int timesTriggered = 0;
 
     private static double lastCommandTime = 0.0;
+    private static double lastTriggerTime = 0.0;
+    private static double sixStackInit = 0.0;
 
     public static void passTopLevel(boolean triggered) {
         top = triggered;
@@ -37,10 +42,20 @@ public class LevelStateManager {
     public static void reset() {
         prevBottom = false;
         can = false;
-        timesTriggered = 0;
+        skipFlag = false;
+        finishFlag = false;
         stabilized = false;
+        timesTriggered = 0;
         setpoint = Constants.E_UP_POSITION.getDouble();
         lastCommandTime = 0.0;
+        sixStackInit = 0.0;
+        skipLastTime = 0.0;
+    }
+
+    public static void pushToDashboard() {
+        SmartDashboard.putBoolean("Top Level", top);
+        SmartDashboard.putBoolean("Middle Level", middle);
+        SmartDashboard.putBoolean("Bottom Level", bottom);
     }
 
     public static double calc() {
@@ -51,30 +66,60 @@ public class LevelStateManager {
         SmartDashboard.putNumber("Times Triggered", timesTriggered);
         SmartDashboard.putBoolean("Can in Auto Stack", can);
 
-        if (bottom != prevBottom && bottom == true) {
-            timesTriggered++;
+        if (bottom != prevBottom && bottom) {
+            if (lastTriggerTime == 0.0 || Timer.getFPGATimestamp() - lastTriggerTime > 2.0) {
+                lastTriggerTime = Timer.getFPGATimestamp();
+                timesTriggered++;
+            }
         }
-        if (!can && top && timesTriggered == 1) {//!can ?
+        if (!can && top && timesTriggered == 2) {//!can ?
             can = true;
             timesTriggered--;
+            //stabilized = true;
         }
         if (bottom && timesTriggered < 6) {
-            if (elevatorAtPosition(Constants.E_DOWN_POSITION.getDouble())) {
-                setpoint = Constants.E_UP_POSITION.getDouble();
-                lastCommandTime = Timer.getFPGATimestamp();
+            if (skipFlag && !finishFlag) {
+                if (Timer.getFPGATimestamp() - skipLastTime > .5) {
+                    setpoint = Constants.E_UP_POSITION.getDouble();
+                    if (Timer.getFPGATimestamp() - skipLastTime > .75) {
+                        stabilized = true;
+                        skipFlag = false;
+                        finishFlag = true;
+                    }
+                }
             } else {
-                if (Timer.getFPGATimestamp() - lastCommandTime > 1.0) {
-                    setpoint = Constants.E_DOWN_POSITION.getDouble();
+                if (finishFlag) {
+                    setpoint = Constants.E_UP_POSITION.getDouble();
+                    lastCommandTime = Timer.getFPGATimestamp();
+                    finishFlag = false;
+                } else {
+                    if (elevatorAtPosition(Constants.E_DOWN_POSITION.getDouble())) {
+                        if (can && timesTriggered == 2 && !finishFlag) {
+                            setpoint = Constants.E_SIX_POSITION.getDouble();
+                            skipFlag = true;
+                            skipLastTime = Timer.getFPGATimestamp();
+                        } else {
+                            setpoint = Constants.E_UP_POSITION.getDouble();
+                            lastCommandTime = Timer.getFPGATimestamp();
+                        }
+                    } else {
+                        if (Timer.getFPGATimestamp() - lastCommandTime > 1.2) {
+                            setpoint = Constants.E_DOWN_POSITION.getDouble();
+                        }
+                    }
                 }
             }
         }
-        if (timesTriggered >= 3) {
-            stabilized = true;
-        } else {
-            stabilized = false;
+        if (!can) {
+            stabilized = timesTriggered >= 3;
         }
         if (timesTriggered >= 6) {
-            setpoint = Constants.E_SIX_POSITION.getDouble();
+            if (sixStackInit == 0.0) {
+                sixStackInit = Timer.getFPGATimestamp();
+                setpoint = Constants.E_DOWN_POSITION.getDouble();
+            } else if (Timer.getFPGATimestamp() - sixStackInit > 0.75) {
+                setpoint = Constants.E_SIX_POSITION.getDouble();
+            }
         }
         return setpoint;
     }
@@ -84,6 +129,6 @@ public class LevelStateManager {
     }
 
     private static boolean elevatorAtPosition(double value) {
-        return Math.abs(Feedback.getInstance().getElevatorPosition() - value) < 2.25;
+        return Math.abs(Feedback.getInstance().getElevatorPosition() - value) < 1.5;
     }
 }

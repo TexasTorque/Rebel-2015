@@ -1,7 +1,7 @@
 package org.texastorque.texastorque20155.constants;
 
 public class Ports {
-
+    
     //drivebase
     public static int LEFT_DRIVE_CIM_MOTOR_PORT = 6;
     public static int LEFT_DRIVE_MINI_MOTOR_PORT = 7;
@@ -30,7 +30,7 @@ public class Ports {
     public static int STABILIZER_SOLENOID_PORT_B = 3;
 
     //sensors
-    public static int TOP_LEVEL_SENSOR_PORT = 7;
+    public static int TOP_LEVEL_SENSOR_PORT = 4;
     public static int MIDDLE_LEVEL_SENSOR_PORT = 6;
     public static int BOTTOM_LEVEL_SENSOR_PORT = 5;
 }

@@ -104,6 +104,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void teleopPeriodic() {
         updateDashboard();
+        LevelStateManager.pushToDashboard();
     }
 
     @Override

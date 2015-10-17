@@ -4,14 +4,16 @@ public abstract class Input {
 
     protected double elevatorSetpoint = 15;
     protected double drivebaseSetpoint;
-    protected double angularDrivebaseSetpoint;
+    protected double drivebaseAngularSetpoint;
 
     protected double leftIntakeSpeed;
     protected double rightIntakeSpeed;
 
     protected boolean stackStabilized = false;
+    protected boolean overrideStabilized = false;
     protected boolean tailDown = false;
     protected boolean autoStackMode = false;
+    protected boolean autoStackPlace = false;
 
     //override values
     protected boolean override = false;
@@ -35,9 +37,9 @@ public abstract class Input {
     public double getDrivebaseSetpoint() {
         return drivebaseSetpoint;
     }
-    
-    public double getAngularDrivebaseSetpoint() {
-        return angularDrivebaseSetpoint;
+
+    public double getDrivebaseAngularSetpoint() {
+        return drivebaseAngularSetpoint;
     }
 
     public double getLeftIntakeSpeed() {
@@ -50,6 +52,18 @@ public abstract class Input {
 
     public boolean isStackStabilized() {
         return stackStabilized;
+    }
+
+    public void passOverrideStabilized(boolean overrideStab) {//ewwww
+        overrideStabilized = overrideStab;
+    }
+
+    public boolean getOverrideStabilized() {
+        return overrideStabilized;
+    }
+
+    public boolean getOverrideAutoStackPlace() {
+        return autoStackPlace;
     }
 
     public boolean isTailDown() {

@@ -48,7 +48,7 @@ public abstract class AutoMode extends Input implements Runnable {
 
         @Override
         public boolean isDone() {
-            return Math.abs(feedback.getElevatorPosition() - height) < 0.12;
+            return Math.abs(feedback.getElevatorPosition() - height) < 0.2;
         }
 
         @Override

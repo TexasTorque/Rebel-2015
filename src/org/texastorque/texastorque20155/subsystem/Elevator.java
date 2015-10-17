@@ -49,7 +49,11 @@ public class Elevator extends Subsystem {
                 LevelStateManager.passMiddleLevel(feedback.isMiddleLevelTriggered());
                 LevelStateManager.passBottomLevel(feedback.isBottomLevelTriggered());
 
-                setpoint = LevelStateManager.calc();
+                if (input.getOverrideAutoStackPlace()) {
+                    setpoint = Constants.E_DOWN_POSITION.getDouble();
+                } else {
+                    setpoint = LevelStateManager.calc();
+                }
             } else {
                 setpoint = input.getElevatorSetpoint();
             }
