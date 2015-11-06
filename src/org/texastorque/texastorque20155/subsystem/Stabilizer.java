@@ -20,7 +20,11 @@ public class Stabilizer extends Subsystem {
                 input.passOverrideStabilized(stabilizing);
             }
         } else {
-            stabilizing = input.getOverrideStabilized();
+            if (input.getOverrideAutoStackPlace()) {
+                stabilizing = false;
+            } else {
+                stabilizing = input.getOverrideStabilized();
+            }
         }
         output();
     }

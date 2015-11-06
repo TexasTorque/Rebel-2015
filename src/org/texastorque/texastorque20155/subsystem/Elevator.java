@@ -55,7 +55,11 @@ public class Elevator extends Subsystem {
                     setpoint = LevelStateManager.calc();
                 }
             } else {
-                setpoint = input.getElevatorSetpoint();
+                if (input.getOverrideAutoStackPlace()) {
+                    setpoint = Constants.E_DOWN_POSITION.getDouble();
+                } else {
+                    setpoint = input.getElevatorSetpoint();
+                }
             }
 
             if (setpoint != previousSetpoint) {
